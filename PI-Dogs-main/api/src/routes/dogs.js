@@ -1,12 +1,9 @@
-const { Router, response } = require('express');
-const axios = require('axios');
-const { Dog, Temperament } = require('../db');
+const { Router } = require('express');
 const {
     listAllDogs,
     searchDogs,
     dogDetail,
-    addDog,
-    listTemperamentsApi} = require ('../routes/controllers.js')
+    addDog} = require ('../routes/controllers.js')
 
 
 const router = Router();
@@ -42,6 +39,7 @@ router.get('/', async (req, res, next) => {
 //   - Incluir los temperamentos asociados
 router.get('/:id', async (req, res, next) => {
     const { id } = req.params
+    // console.log(typeof(id));
         try {
             res.status(200).send(await dogDetail(id))
         } catch (error) {
@@ -53,10 +51,10 @@ router.get('/:id', async (req, res, next) => {
 //   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de raza de perro por body
 //   - Crea una raza de perro en la base de datos relacionada con sus temperamentos
 router.post('/', async (req, res, next) => {
-    const { name, minHeight, maxHeight, minWeight, maxWeight, lifeSpan, temperament, imgUrl } = req.body
+    const { name, minHeight, maxHeight, minWeight, maxWeight, lifeSpan, temperament, imgUrl, was_created } = req.body
     try {
-        const create = await addDog(name, minHeight, maxHeight, minWeight, maxWeight, lifeSpan, temperament, imgUrl)
-        res.status(200).send(create)
+        const create = await addDog(name, minHeight, maxHeight, minWeight, maxWeight, lifeSpan, temperament, imgUrl, was_created)
+        res.status(200).send("dog successfully created!!")
     } catch (error) {
         res.status(404).send(error.message)
     }
