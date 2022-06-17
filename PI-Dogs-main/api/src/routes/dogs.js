@@ -51,9 +51,9 @@ router.get('/:id', async (req, res, next) => {
 //   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de raza de perro por body
 //   - Crea una raza de perro en la base de datos relacionada con sus temperamentos
 router.post('/', async (req, res, next) => {
-    const { name, minHeight, maxHeight, minWeight, maxWeight, lifeSpan, temperament, imgUrl, was_created } = req.body
+    const { name, minHeight, maxHeight, minWeight, maxWeight, lifeSpanMin, lifeSpanMax, temperament, imgUrl, was_created } = req.body
     try {
-        const create = await addDog(name, minHeight, maxHeight, minWeight, maxWeight, lifeSpan, temperament, imgUrl, was_created)
+        const create = await addDog(name, minHeight, maxHeight, minWeight, maxWeight, lifeSpanMin, lifeSpanMax, temperament, imgUrl, was_created)
         res.status(200).send("dog successfully created!!")
     } catch (error) {
         res.status(404).send(error.message)

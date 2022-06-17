@@ -1,0 +1,20 @@
+.Card {
+    background: rgba(249, 222, 201, .6);
+    border-width: 2px;
+    border-color: rgb(81, 63, 49);
+    border-style: solid;
+    border-radius: 25px;
+    text-align: center;
+    color: black;
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -200px 0 0 -200px;
+}
+
+.DogName {
+    font-family: 'Nuosu SIL', serif;
+    font-size: 25px;
+}

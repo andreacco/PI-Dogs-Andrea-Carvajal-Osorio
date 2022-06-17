@@ -1,10 +1,23 @@
 import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import Landing from './components/Landing/Landing.jsx'
+import Nav from './components/Nav/Nav.jsx'
+import Home from './components/Home/Home.jsx'
+import DogDetails from './components/DogDetails/DogDetails.jsx'
+import CreateDog from './components/CreateDog/CreateDog.jsx'
+
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Dogs</h1>
-    </div>
+      <div className="App">
+        <Route path = "/home" component ={Nav}/>
+        <Switch>
+        <Route exact path="/" component={Landing}/>
+        <Route exact path = "/home" component ={Home}/>
+        <Route path = "/home/create" component={CreateDog}/>
+        <Route path = "/home/:dogId" component ={DogDetails}/>
+        </Switch>
+      </div>
   );
 }
 

@@ -24,6 +24,7 @@ require('dotenv').config();
         //     "image": {
         //     "url": "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg"
         //     }
+        let regex = /(\d+)/g
         const link = await axios.get(`https://api.thedogapi.com/v1/breeds?API_KEY=${API_KEY}`)
         const dog = await link.data.map(d => {
             return {
@@ -33,7 +34,8 @@ require('dotenv').config();
                 max_height: Number(d.height.metric.slice(4)), // que extraiga desde 4 y terminando en arr.lenght, res --> 29
                 min_weight: Number(d.weight.metric.slice(0, 2)),
                 max_weight: Number(d.weight.metric.slice(4)),
-                life_span: d.life_span,
+                life_span_min: Math.min(...d.life_span.match(regex)), // le digo con elregex que busque solo los numeros que matcheen con el string que me trae la api, luego busco el menor y es lo que guarda life_span_min
+                life_span_max: Math.max(...d.life_span.match(regex)), // le digo con el regex que busque solo los numeros que matcheen con el string que me trae la api, luego busco el mayor y es lo que guarda life_span_max
                 temperament: d.temperament,
                 img: d.image.url
             }
@@ -108,7 +110,7 @@ require('dotenv').config();
     };
 
 
-    const addDog = async (name, minHeight, maxHeight, minWeight, maxWeight, lifeSpan, temperament, imgUrl, was_created) => {
+    const addDog = async (name, minHeight, maxHeight, minWeight, maxWeight, lifeSpanMin, lifeSpanMax, temperament, imgUrl, was_created) => {
         // Va a crear un perro nuevo desde el form de crear perro y guardarlo en la base de datos perro, con la relación con sus temperamentos
         if (!name || !minHeight || !maxHeight || !minWeight || !maxWeight || !temperament) {
             throw Error(`Data required`)
@@ -120,7 +122,8 @@ require('dotenv').config();
                 max_height: maxHeight, 
                 min_weight: minWeight, 
                 max_weight: maxWeight, 
-                life_span: lifeSpan + " years",
+                life_span_min: lifeSpanMin,
+                life_span_max: lifeSpanMax,
                 image: imgUrl,
                 was_created: true
             });
@@ -167,4 +170,126 @@ require('dotenv').config();
         return allTemperaments;
     };
 
-module.exports = { listDogsApi, listDogsBd, listAllDogs, searchDogs, dogDetail, addDog, listTemperamentsApi }
+    const filterByDescName = async () => {
+        let allDogsAsc = await listAllDogs()
+        allDogsAsc.sort((a, b) => a.name > b.name ? -1 : 1);
+        return allDogsAsc;
+    }
+
+    const orderByWeightMin = async () => {
+        const allDogsWeight = await listAllDogs();
+        let weight = await allDogsWeight.sort((a, b) => {
+            if(a.min_weight && b.min_weight)    {
+                if(a.min_weight === b.min_weight){
+                    if(a.max_weight > b.max_weight) {
+                        return 1
+                    }
+                    else if(a.max_weight < b.max_weight) {
+                        return -1
+                    }
+                } else if (a.min_weight > b.min_weight) {
+                    return 1
+                    }
+                    else {
+                        return -1
+                    }
+            }
+            else {
+                let minWeightA = !a.min_weight? a.max_weight : a.min_weight
+                let maxWeightA = !a.max_weight? a.min_weight : a.max_weight
+                let minWeightB = !b.min_weight? b.max_weight : b.min_weight
+                let maxWeightB = !b.max_weight? b.min_weight : b.max_weight
+                if(minWeightA === minWeightB) {
+                    if(maxWeightA > maxWeightB) {
+                        return 1
+                    }
+                    if(maxWeightA < maxWeightB) {
+                        return -1
+                    }
+                    if(minWeightA > minWeightB) {
+                        return 1
+                    }
+                    else {
+                        return -1
+                    }
+                }
+            }
+        })
+        return weight
+    }
+
+    const orderByWeightMax = async () => {
+        const allDogsWeight = await listAllDogs();
+        let weight = allDogsWeight.sort((a, b) => {
+            if(a.min_weight && b.min_weight) {
+                if(a.max_weight === b.max_weight) {
+                    if(a.min_weight > b.min_weight) {
+                        return -1
+                    }
+                    if (a.min_weight < b.min_weight) {
+                        return  1
+                    }
+                }
+                else if(a.max_weight > b.max_weight) {
+                    return -1
+                }
+                else {
+                    return 1
+                }
+            }
+            // else {
+            //     let minWeightA = !a.min_weight? a.max_weight : a.min_weight
+            //     let maxWeightA = !a.max_weight? a.min_weight : a.max_weight
+            //     let minWeightB = !b.min_weight? b.max_weight : b.min_weight
+            //     let maxWeightB = !b.max_weight? b.min_weight : b.max_weight
+            //     if(minWeightA === minWeightB) {
+            //         if(maxWeightA > maxWeightB){
+            //             return -1
+            //         }
+            //         if(maxWeightA < maxWeightB) {
+            //             return 1
+            //     }
+            //         if(minWeightA > minWeightB) {
+            //             return -1
+            //     }
+            //         else {
+            //             return 1
+            //         }
+            //     }
+            // }
+        })
+        return weight
+    }
+
+    // LO VOY A HACER DESDE EL FRONT PORQUE TENGO QUE HACER AL MENOS UNO EN EL FRONT
+    // const searchByTemp = async (temperament) => {
+    //     const allTemps = await listAllDogs();
+    //     let tempFilter = allTemps.filter((d) => d.temperament.includes(temperament))
+    //     return tempFilter;
+    // }
+
+    const orderByNameAscApi = async () => {
+        const allDogsApi = await listDogsApi();
+        const ordered = await allDogsApi.sort((a, b) => a.name > b.name ? 1 : -1);
+        return ordered;
+    }
+
+    const orderByNameDescApi = async () => {
+        const allDogsApi = await listDogsApi();
+        const ordered = await allDogsApi.sort((a, b) => a.name > b.name ? -1 : 1);
+        return ordered;
+    }
+
+    const orderByNameAscDb = async () => {
+        const allDogsDb = await listDogsBd();
+        const ordered = await allDogsDb.sort((a, b) => a.name > b.name ? 1 : -1);
+        return ordered;
+    }
+
+    const orderByNameDescDb = async () => {
+        const allDogsDb = await listDogsBd();
+        const ordered = await allDogsDb.sort((a, b) => a.name > b.name ? -1 : 1);
+        return ordered;
+    }
+
+module.exports = { listDogsApi, listDogsBd, listAllDogs, searchDogs, dogDetail, addDog, listTemperamentsApi, filterByDescName, orderByWeightMin, orderByWeightMax, orderByNameAscApi, orderByNameDescApi, orderByNameAscDb, orderByNameDescDb }
