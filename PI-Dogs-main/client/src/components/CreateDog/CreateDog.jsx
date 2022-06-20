@@ -90,6 +90,8 @@ export default function CreateDog(){
     function validate(value){
         let err={}
         let regex = new RegExp("^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$")
+        //--------------------INIT NAME------------------------//
+
         if(!value.name){
             err.name = "Name required"
         }
@@ -100,6 +102,11 @@ export default function CreateDog(){
           } else if (value.name.includes("-") || value.name.charAt(value.name.length - 1) == " " || value.name.charAt(0) == " ") {
             err.name = "Enter a valid name, mix of capital and lower case!";
           }
+        
+        //--------------------END NAME------------------------//
+        
+        //--------------------INIT HEIGHT------------------------//
+
         else if(!value.min_height && !value.max_height){
             err.min_height = "Min Height required"
             err.max_height = "Max Height required"
@@ -108,10 +115,22 @@ export default function CreateDog(){
               err.min_height = "Value needs to be a Number"
               err.max_height = "Value needs to be a Number"
             }
-        else if(value.max_height > 80 || value.min_height <= 0 || value.max_height < value.min_height || value.min_height > value.max_height){
-        err.min_height = "Value needs to be less than 80 and less than Height Max and greater than 0"
-        err.max_height = "Value needs to be less than 80 and greater than Height Min and greater than 0"
+        else if(value.min_height < 10 || value.min_height > 99){
+            err.min_height= 'The minimum height of the dog must contain at least 2 digits'
         }
+        else if(value.min_height > value.max_height){
+            err.min_height='The minimum height of the breed cannot be greater than the maximum height'
+        }
+        else if(value.max_height < 10 || value.max_height > 999){
+            err.max_height= 'The maximum height of the dog must contain 2 to 3 digits'
+        }
+        else if(value.min_height > value.max_height){
+            err.max_height='The maximum height of the breed cannot be less than the minimum height'
+        }
+        //--------------------END HEIGHT------------------------//
+
+        //--------------------INIT WEIGHT------------------------//
+
         else if(!value.min_weight && !value.max_weight){
             err.min_weight = "Min Height required"
             err.max_weight = "Max Height required"
@@ -120,27 +139,71 @@ export default function CreateDog(){
             err.min_weight = "Value needs to be a Number"
             err.max_weight = "Value needs to be a Number"
         }
-        else if(value.max_weight > 100 || value.min_weight <= 0 || value.max_weight < value.min_weight || value.min_weight > value.max_weight){
-            err.min_weight = "Value needs to be less than 100 and less than Weight Max and greater than 0"
-            err.max_weight = "Value needs to be less than 100 and greater than Weight Min and greater than 0"
+        else if(value.min_weight < 1 || value.min_weight > 99){
+            err.min_weight= 'The minimum weight of the dog must contain a maximum of 2 digits';
         }
+        else if(value.min_weight > value.max_weight){
+            err.min_weight= 'The minimum weight of the dog cannot be greater than the maximum weight';
+        }
+        if(!value.max_weight){
+            err.max_weight= 'The maximum weight of the dog is required'
+        }
+        else if(value.max_weight < 1 || value.max_weight > 99){
+            err.max_weight= 'The maximum weight of the dog must contain a maximum of 2 digits';
+        }
+        else if(value.min_weight > value.max_weight){
+            err.max_weight='The maximum weight of the dog cannot be less than the minimum weight';
+        }
+        else if(value.min_weight > 9 && value.max_weight < 10){
+            err.max_weight= 'The maximum weight of the dog cannot be less than the minimum weight'
+        }
+
+        //--------------------END WEIGHT------------------------//
+
+        //--------------------INIT LIFE SPAN------------------------//
+
         else if(!Number(value.life_span_min) && !Number(value.life_span_max)){
             err.life_span_min = "Value needs to be a Number"
             err.life_span_max = "Value needs to be a Number"
         }
-        else if(value.life_span_max > 20 || value.life_span_min <= 0 || value.life_span_max < value.life_span_min || value.life_span_min > value.life_span_max){
-            err.life_span_min = "Value needs to be less than 20 and less than Life Span Max and greater than 0"
-            err.life_span_max = "Value needs to be less than 20 and greater than Life Span Min and greater than 0"
+        else if(value.life_span_min < 1 || value.life_span_min > 99){
+            err.life_span_min='The minimum years of life of the dog must contain 1 to 2 digits'
         }
+        else if(value.life_span_min > value.life_span_max){
+            err.life_span_min='The minimum life span of the dog cannot be greater than the maximum'
+        }
+        else if(value.life_span_max < value.life_span_min){
+            err.life_span_max= 'The maximum life span of the dog cannot be less than the minimum'
+        }
+        else if(value.life_span_min > 9 && value.life_span_max < 10){
+            err.life_span_max= 'The maximum life span of the dog cannot be less than the minimum'
+        }
+
+        //--------------------END LIFE SPAN------------------------//
+
+        // else if(value.life_span_max > 20 || value.life_span_min <= 0 || value.life_span_max < value.life_span_min || value.life_span_min > value.life_span_max){
+        //     err.life_span_min = "Value needs to be less than 20 and less than Life Span Max and greater than 0"
+        //     err.life_span_max = "Value needs to be less than 20 and greater than Life Span Min and greater than 0"
+        // }
+
+        //--------------------INIT IMAGE------------------------//
+
         else if(regex.test(value.image) === false) {
             err.image = "Value needs to be an image URL"
         }
+
+        //--------------------END IMAGE------------------------//
+
+        //--------------------INIT TEMPERAMENTS------------------------//
+
         else if(!value.temperaments.length){
             err.temperaments = "Temperaments required"
         }
-        else if (value.temperaments?.length === 5) {
+        else if (value.temperaments.length === 5) {
             err.temperaments = "You can only add up to six temperaments";
         }
+
+        //--------------------END TEMPERAMENTS------------------------//
         return err
     }
 

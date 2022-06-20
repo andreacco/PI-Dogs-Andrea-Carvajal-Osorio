@@ -18,7 +18,7 @@ export default function DogCard ({id, image, name, minWeight, maxWeight, tempera
                  {/* <h1 className="dog-name" >{temperaments}</h1> */}
                  <h3>
                     {was_created
-                        ? temperaments.map((e) => e.name).join(", ") // ["","",""]
+                        ? temperaments.map((e) => e.name) // ["","",""]
                         : temperaments
                         ? temperaments
                         : "🤷‍♂️ No temperaments provided for this breed 🤷‍♀️"}
