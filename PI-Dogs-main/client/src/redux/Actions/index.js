@@ -5,58 +5,54 @@ export const CLEAR_DOG_DETAIL = 'CLEAR_DOG_DETAIL'
 export const CREATE_DOG = 'CREATE_DOG'
 export const SEARCH_DOG = 'SEARCH_DOG'
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS'
-export const FILTER_BY_DB_API_DOGS = 'FILTER_BY_DB_API_DOGS'
+export const FILTER_BY_CREATED_DOGS = 'FILTER_BY_CREATED_DOGS'
 export const FILTER_BY_TEMPERAMENT = 'FILTER_BY_TEMPERAMENT'
 export const SORT_BY = 'SORT_BY'
-// export const FILTER_BY_API_DOGS = 'FILTER_BY_API_DOGS'
-// export const ORDER_BY_ASC_WEIGHT = 'ORDER_BY_ASC_WEIGHT'
-// export const ORDER_BY_DESC_WEIGHT = 'ORDER_BY_DESC_WEIGHT'
-// export const ORDER_BY_ASC_NAME_ALL = 'ORDER_BY_ASC_NAME_ALL'
-// export const ORDER_BY_DESC_NAME_ALL = 'ORDER_BY_DESC_NAME_ALL'
-// export const ORDER_BY_ASC_NAME_API = 'ORDER_BY_ASC_NAME_API'
-// export const ORDER_BY_DESC_NAME_API = 'ORDER_BY_DESC_NAME_API'
-// export const ORDER_BY_ASC_NAME_DB = 'ORDER_BY_ASC_NAME_DB'
-// export const ORDER_BY_DESC_NAME_DB = 'ORDER_BY_DESC_NAME_DB'
-
-//Con Async Await
-// export const getAllDogs = () => async dispatch => {
-//     let json = await axios.get('http://localhost:3001/dogs')
-//     return dispatch({
-//         type: GET_ALL_DOGS, 
-//         payload: json.data
-//     })
-// }
-// Con promesas
 
 export const getAllDogs = () => async dispatch => {
-    return await axios.get('http://localhost:3001/dogs')
-    .then(response => response.data)
-    .then(Alldogs => {
-        return dispatch({ type: GET_ALL_DOGS, payload: Alldogs })
-    })
-}
-
-export const getDogDetail = (id) => async dispatch => {
-    return await axios.get(`http://localhost:3001/dogs/${id}`)
-    .then(response => response.data)
-    .then(dog => {
-        return dispatch({ type: GET_DOG_DETAIL, payload: dog })
-    })
-    // .catch(error => {
-    //     return dispatch({type: GET_DOG_DETAIL, payload: error})
-    // })
-}
-
-export const searchDog = (name) => async (dispatch) => {
-        return await axios.get(`http://localhost:3001/dogs?name=${name}`)
+    try {
+        await axios.get('http://localhost:3001/dogs')
         .then(response => response.data)
-        .then((dog) => {
-            return dispatch({ type: SEARCH_DOG, payload: dog })
+        .then(Alldogs => {
+            return dispatch({ type: GET_ALL_DOGS, payload: Alldogs })
         })
-        .catch(error => {
-            return dispatch ({ type: SEARCH_DOG, payload: error })
-        })
+    } catch (error) {
+        console.log(error)
     }
+}
+
+export function createDog(newDog){
+    return async function (dispatch){
+        try {
+            let res = await axios.post('http://localhost:3001/dogs', newDog)
+            return dispatch({type: CREATE_DOG, payload: res.data})
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export function getDogDetail(id){
+    return async function (dispatch){
+        try {
+            let res = await axios.get(`http://localhost:3001/dogs/${id}`)
+            return dispatch({type: GET_DOG_DETAIL, payload: res.data})
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export function searchDog(name){
+    return async function (dispatch){
+        try {
+            let dog = await axios.get(`http://localhost:3001/dogs?name=${name}`)
+            return dispatch({type: SEARCH_DOG, payload: dog.data})
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
 
 export const getTemperaments = () => async dispatch => {
     return await axios.get("http://localhost:3001/temperaments")
@@ -66,14 +62,9 @@ export const getTemperaments = () => async dispatch => {
     })
 }
 
-export const createDog = (newDog) => async () => {
-    const response = await axios.post("http://localhost:3001/dogs", newDog)
-    return response;
-}
-
-export const filterDogsDbApi = (filter) => {
+export const filterCreatedDogs = (filter) => {
     return {
-        type: FILTER_BY_DB_API_DOGS, 
+        type: FILTER_BY_CREATED_DOGS, 
         payload: filter
     }
 }

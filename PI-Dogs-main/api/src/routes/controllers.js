@@ -20,6 +20,7 @@ require('dotenv').config();
         //     "id": 1,
         //     "name": "Affenpinscher",
         //     "life_span": "10 - 12 years",
+        //                   10 years
         //     "temperament": "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
         //     "image": {
         //     "url": "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg"
@@ -36,8 +37,8 @@ require('dotenv').config();
                 max_weight: Number(d.weight.metric.slice(4)),
                 life_span_min: Math.min(...d.life_span.match(regex)), // le digo con elregex que busque solo los numeros que matcheen con el string que me trae la api, luego busco el menor y es lo que guarda life_span_min
                 life_span_max: Math.max(...d.life_span.match(regex)), // le digo con el regex que busque solo los numeros que matcheen con el string que me trae la api, luego busco el mayor y es lo que guarda life_span_max
-                temperament: d.temperament,
-                img: d.image.url
+                temperaments: d.temperament,
+                image: d.image.url
             }
         });
         return dog;
@@ -110,31 +111,29 @@ require('dotenv').config();
     };
 
 
-    const addDog = async (name, minHeight, maxHeight, minWeight, maxWeight, lifeSpanMin, lifeSpanMax, temperament, imgUrl, was_created) => {
+    const addDog = async (name, min_height, max_height, min_weight, max_weight, life_span_min, life_span_max, temperaments, image) => {
         // Va a crear un perro nuevo desde el form de crear perro y guardarlo en la base de datos perro, con la relación con sus temperamentos
-        if (!name || !minHeight || !maxHeight || !minWeight || !maxWeight || !temperament) {
-            throw Error(`Data required`)
-        }
-        else {
+        if(name && min_height && max_height && min_weight && max_weight && temperaments) {
             const createDog = await Dog.create({
                 name: name, 
-                min_height: minHeight, 
-                max_height: maxHeight, 
-                min_weight: minWeight, 
-                max_weight: maxWeight, 
-                life_span_min: lifeSpanMin,
-                life_span_max: lifeSpanMax,
-                image: imgUrl,
-                was_created: true
+                min_height,
+                max_height, 
+                min_weight, 
+                max_weight, 
+                life_span_min,
+                life_span_max,
+                image
             });
             const newTemp = await Temperament.findAll({
-                    where: { name: temperament }, // aquí busco todos los temperamentos que coincidan con os que ya tengo en mi base de datos y los que me entran por parametro
+                    where: { name: temperaments }, // aquí busco todos los temperamentos que coincidan con os que ya tengo en mi base de datos y los que me entran por parametro
                 });
                 return await createDog.addTemperament(newTemp); // ahora le digo que le agregue el temperamento al perro que cree arriba con los temperamentos en parametros
         }
+        else {
+            throw Error(`Data required`)
+        }
     };
-
-
+    
     const listTemperamentsApi = async () => {
         // Va a pedirle a la Api todos los temperamentos
         // Esos temperamentos los va a guardar en la base de datos 
@@ -142,7 +141,7 @@ require('dotenv').config();
         // Así me llega la info:
         //     "temperament": "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
         const temperamentApi = await listDogsApi();
-        let temp = temperamentApi.map((d) => d.temperament) // la data me llega como: ["temp 1, temp2, temp3", "temp 4, temp5"...] 
+        let temp = temperamentApi.map((d) => d.temperaments) // la data me llega como: ["temp 1, temp2, temp3", "temp 4, temp5"...] 
         // console.log(temp)
         temp = await temp.join(", ").split(", ").sort() // los uno todos separandolos por coma y espacio, y luego los pongo en un arreglo cada uno como un string sin contar la coma y el espacio entre ellos.
         // console.log(temp)
@@ -153,6 +152,7 @@ require('dotenv').config();
                 noRepeat.push(currentTemp)
             }
         }
+        // let temperamentsSet = new Set (temp) // el Set guarda valores unicos en un obj 
         let fullTemps = noRepeat.filter(Boolean) // elimino los strings vacios de mi array
         // console.log(fullTemps)
         // console.log(fullTemps.length)

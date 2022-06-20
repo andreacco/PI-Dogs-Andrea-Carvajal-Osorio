@@ -11,11 +11,11 @@ export default function Pagination ({ dogsPerPage, allDogs, paginate }) {
     
     return (
         <nav>
-            <ul className="paginate">
+            <ul>
                 {pages && pages.map(num => (
-                    <li className="numbers" key={num}>
-                        <p onClick={() => paginate(num)}>{num}</p>
-                    </li>
+                    <span key={num}>
+                        <button onClick={() => paginate(num)}>{num}</button>
+                    </span>
                 ))}
             </ul>
         </nav>

@@ -1,0 +1,25 @@
+// SOBRE EL PAGINADO
+/* 1.
+        indexOfLastDog = currentPage * dogsPerPage;
+        indexOfLastDog =     1       *      8
+                8
+        indexOfFirstDog = indexOfLastDog - dogsPerPage
+        indexOfFirstDog =       8        -      8
+                0
+        Va a agarrar todo mi areglo de perros y traerme solo los que le indico por params, pero el slice no toma en cuenta el index del segundo param sino un indice antes de ese
+        currentDog = allDogs.slice(indexOfFirstDog, indexOfLastDog)
+        currentDog = allDogs.slice(0, 8)
+        ME VA A TRAER:
+CONTEO:  1, 2, 3, 4, 5, 6, 7, 8
+        [0, 1, 2, 3, 4, 5, 6, 7]
+------------------PAGINA 2-------------
+        2.
+        indexOfLastDog = 16
+        indexOfFirstDog = 8
+        currentDog = allDogs.slice(8, 16)
+        ME VA A TRAER:
+CONTEO:  1, 2,  3,  4,  5,  6,  7,  8
+        [8, 9, 10, 11, 12, 13, 14, 15]
+    */
+
+

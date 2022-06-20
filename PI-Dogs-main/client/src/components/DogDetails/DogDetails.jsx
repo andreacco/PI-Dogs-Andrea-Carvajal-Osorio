@@ -1,41 +1,56 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getDogDetail } from "../../redux/Actions";
+import { getDogDetail, clearDogDetail } from "../../redux/Actions";
 
-export default function DogCard(props) {
+export default function DogDetail(props) {
     const dispatch = useDispatch()
-    const id = props.match.params.id
+    const index = props.match.params.id
+
     const dog = useSelector(state => state.dogDetail)
 
     useEffect(() => {
-        dispatch(getDogDetail(id))
-    }, [id, dispatch])
+        dispatch(getDogDetail(index))
+        return () => { // willUnmount
+            //limpiar el estado cuando se desmonte
+            dispatch(clearDogDetail())
+          }
+    }, [index, dispatch])
+
     return (
         <div>
-            <img src={dog.img} alt="dog-img"/>
+            {dog ?
             <div>
+                <img src={dog.image} alt="dog-img" height="200px"/>
                 <h1>{dog.name}</h1>
-                <span>
-                    <h2>Weight:</h2>
-                    <h3>{`${dog.min_weight} - ${dog.max_weight} Kg`}</h3>
-                </span>
-                <span>
-                    <h2>Height:</h2>
-                    <h3>{`${dog.min_height} - ${dog.max_height} Kg`}</h3>
-                </span>
-                <span>
-                    <h2>Life Span: </h2>
-                    <h3>{`${dog.life_span_min} - ${dog.life_span_max} years`}</h3>
-                </span>
-                <span>
-                    <h3>Temperaments:</h3>
-                    <div>{this.props.temperaments.split(", ").map((t, i) => (
-                    <span key={i}>{t}</span>
+                <h2>Weight:</h2>
+                {dog.min_weight
+                  ? dog.min_weight
+                  : "There's no weight provided for this dog"}{" - "}
+                {dog.max_weight
+                  ? `${dog.max_weight} Kg`
+                  : "There's no weight provided for this dog"}
+                <h2>Height:</h2>
+                {/* <h3>{`${dog.min_height} - ${dog.max_height} Kg`}</h3> */}
+                <h2>Life Span: </h2>
+                {dog.life_span_min || dog.life_span_max
+                    ? dog.life_span_min !== dog.life_span_max
+                    ? `${dog.life_span_min} - ${dog.life_span_max} years`
+                    : `${dog.life_span_min} years`
+                  : "There's no Life Span provided for this dog!"}
+                {/* <h3>Temperament: {!dog.was_created? dog.temperaments : dog.temperaments.map(t => t.name)}</h3> */}
+                <h3>
+                    {dog.was_created
+                        ? dog.temperaments.map((e) => e.name).join(", ") // ["","",""]
+                        : dog.temperaments
+                        ? dog.temperaments
+                        : "🤷‍♂️ No temperaments provided for this breed 🤷‍♀️"}
+                </h3>
+                {/* <div>{dog.temperaments.split(", ").map((t, i) => (
+                    key={i}>{t}
                     ))}
-                    </div>
-                </span>
-            </div>
+                </div> */}
+            </div> : <p>Loading...</p>}
             <Link to = "/home">
                 <button>Go Back</button>
             </Link>

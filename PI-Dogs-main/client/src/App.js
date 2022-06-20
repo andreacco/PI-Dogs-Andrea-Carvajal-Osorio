@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Landing from './components/Landing/Landing.jsx'
 import Nav from './components/Nav/Nav.jsx'
 import Home from './components/Home/Home.jsx'
-import DogDetails from './components/DogDetails/DogDetails.jsx'
+import DogDetail from './components/DogDetails/DogDetails';
 import CreateDog from './components/CreateDog/CreateDog.jsx'
 
 
@@ -15,7 +15,7 @@ function App() {
         <Route exact path="/" component={Landing}/>
         <Route exact path = "/home" component ={Home}/>
         <Route path = "/home/create" component={CreateDog}/>
-        <Route path = "/home/:dogId" component ={DogDetails}/>
+        <Route path = "/home/:dogId" component ={DogDetail}/>
         </Switch>
       </div>
   );

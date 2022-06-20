@@ -1,5 +1,81 @@
 const { dogDetail } = require("../../Desktop/PI-Dogs-Andrea-Carvajal-Osorio/PI-Dogs-main/api/src/routes/controllers")
 
+// const rootReducer = (state = initialState, action) => {
+    //     switch (action.type) {
+    //         case GET_ALL_DOGS:
+    //             return{
+    //                 ...state,
+    //                 dogs: action.payload,
+    //                 allDogs: action.payload
+    //             }
+    //         case GET_DOG_DETAIL:
+    //         case CLEAR_DOG_DETAIL:
+    //         case CREATE_DOG:
+    //         case SEARCH_DOG:
+    //         case GET_TEMPERAMENTS:
+    //         case FILTER_BY_CREATED_DOGS:
+    //         case FILTER_BY_TEMPERAMENT:
+    //         case SORT_BY:
+    //             // {type: SORT_BY, payload: type(el tipo de orden que escoje el cliente)}
+    //             let sorteredDogs = []
+    //             if(action.payload == "nameAsc") {
+                    
+    //             }
+    //             if(action.payload == "nameDesc") {
+    
+    //             }
+    //             if(action.payload == "weightAsc") {
+    
+    //             }
+    //             if(action.payload == "weightDesc") {
+    
+    //             }
+    //             return {
+    //                 ...state,
+    //                 dogs: action.payload == "all" ? state.dogs : sorteredDogs,
+    //                 sortFilter: {
+    //                     ...state.sortFilter,
+    //                     sortType: action.payload
+    //             }
+    //         default: 
+    //             return {...state};
+    //     };
+    // };
+
+// PERROS PARA AGREGAR:
+{
+  "name": "My doggie",
+  "minHeight": 8,
+  "maxHeight": 12,
+  "minWeight": 2,
+  "maxWeight": 5,
+  "lifeSpanMin": 10,
+  "lifeSpanMax": 12,
+  "temperament": "Happy, Alert, Bright, Intelligent, Protective"
+}
+{
+  "name": "Doggie",
+  "minHeight": 10,
+  "maxHeight": 14,
+  "minWeight": 5,
+  "maxWeight": 8,
+  "lifeSpanMin": 10,
+  "lifeSpanMax": 12,
+  "temperament": "Cooperative, Active, Affectionate"
+}
+{
+  "name": "Mine",
+  "minHeight": 20,
+  "maxHeight": 25,
+  "minWeight": 15,
+  "maxWeight": 25,
+  "lifeSpanMin": 12,
+  "lifeSpanMax": 14,
+  "temperament": "Bubbly, Adaptable, Adventurous"
+}
+
+
+
 const obj = {
     weight: {
         imperial: "6 - 13",
