@@ -19,7 +19,7 @@ export default function DogDetail(props) {
 
     return (
         <div>
-            {dog ?
+            {Object.values(dog).length >0 ?
             <div>
                 <img src={dog.image} alt="dog-img" height="200px"/>
                 <h1>{dog.name}</h1>
@@ -31,7 +31,7 @@ export default function DogDetail(props) {
                   ? `${dog.max_weight} Kg`
                   : "There's no weight provided for this dog"}
                 <h2>Height:</h2>
-                {/* <h3>{`${dog.min_height} - ${dog.max_height} Kg`}</h3> */}
+                <h3>{`${dog.min_height} - ${dog.max_height} cm`}</h3>
                 <h2>Life Span: </h2>
                 {dog.life_span_min || dog.life_span_max
                     ? dog.life_span_min !== dog.life_span_max

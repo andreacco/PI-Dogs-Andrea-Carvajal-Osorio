@@ -6,6 +6,7 @@ const initialState = {
     allDogs: [],
     temperaments: [],
     dogDetail: {},
+    filtered: [],
     sortFilter: { // Aqui es donde voy a guardar el filtro actual que quiere ver el cliente, asi es como puedo hacer todos los filtros a la vez
         // los ordenamientos son: 'nameAsc', 'nameDesc', 'weightAsc', 'weightDesc'
         sortType: "all", // este es mi caso default de los ordenamientos pero va a ir cambiando segun lo que el cliente quiera ven en pantalla
@@ -22,7 +23,8 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state, 
                 dogs: action.payload,
-                allDogs: action.payload
+                allDogs: action.payload,
+                filtered: action.payload
             }
             
         case GET_DOG_DETAIL:
@@ -55,28 +57,46 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case FILTER_BY_CREATED_DOGS:
-            const filteredDogs = action.payload === "DB" ? state.allDogs.filter(dog => dog.was_created) : state.allDogs.filter(dog => !dog.was_created)
-            return {
+            let filtBreed= state.allDogs;
+            // console.log(filtBreed)
+            let createdFilter= 
+            action.payload === 'all' ?
+            filtBreed :
+            action.payload === 'DB' ?
+            filtBreed.filter((e) => e.was_created) :
+            filtBreed.filter((e) =>!e.was_created)
+            return{
                 ...state,
-                dogs: action.payload === "all" ? state.allDogs : filteredDogs,
-                sortFilter: {
-                    ...state.sortFilter,
-                    filterApiDB: action.payload
-                }
-            }
+                dogs: createdFilter,
+            };
+            // const filteredDogs = action.payload === "DB" ? state.allDogs.filter(dog => dog.was_created) : state.allDogs.filter(dog => !dog.was_created)
+            // return {
+            //     ...state,
+            //     dogs: action.payload === "all" ? state.allDogs : filteredDogs,
+            //     sortFilter: {
+            //         ...state.sortFilter,
+            //         filterApiDB: action.payload
+            //     }
+            // }
 
         case FILTER_BY_TEMPERAMENT:
-            const filteredDogsTemp = action.payload === 'all' ? state.dogs : state.dogs.filter((d) => {
-                return d.temperaments && d.temperaments.includes(action.payload)
-            });
-            return {
-                ...state,
-                dogs: filteredDogsTemp,
-                sortFilter: {
-                    ...state.sortFilter,
-                    filterTemps: action.payload
-                }
-            }
+          const filter = action.payload === 'all' ? state.filtered : state.filtered?.filter(data => data.temperaments?.includes(action.payload));
+          return{
+              ...state,
+              dogs: filter,
+              
+          }
+            // const filteredDogsTemp = action.payload === 'all' ? state.dogs : state.dogs.filter((d) => {
+            //     return d.temperaments && d.temperaments.includes(action.payload)
+            // });
+            // return {
+            //     ...state,
+            //     dogs: filteredDogsTemp,
+            //     sortFilter: {
+            //         ...state.sortFilter,
+            //         filterTemps: action.payload
+            //     }
+            // }
 
         case SORT_BY:
             let sort = [];

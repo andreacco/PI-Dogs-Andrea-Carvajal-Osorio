@@ -4,7 +4,6 @@ import DogCard from "../DogCard/DogCard.jsx";
 import { getAllDogs, searchDog, getTemperaments, filterCreatedDogs, sortBy, filterByTemperament } from "../../redux/Actions/index.js";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../Pagination/Pagination.jsx";
-// import SearchBar from "../SearchBar/SearchBar.jsx";
 
 
 export default function Home() {
@@ -28,10 +27,6 @@ export default function Home() {
     }
 //-------------------END PAGINADO---------------------//
 
-// loading ---default--> false
-// entrando a home, queremos que cambie a true
-// luego que traiga la info (dogs.length)? cambiar el loading otra vez false
-
 //-----------------INIT SEARCH BAR--------------------//
     const [input, setInput] = useState('')
     
@@ -53,18 +48,6 @@ export default function Home() {
 //--------------------INIT SORT----------------------//
 // const sortFilter = useSelector(state => state.sortFilter.filterApiDB)
 
-    // const initialState = {
-    //     dogs: [],
-    //     allDogs: [],
-    //     temperaments: [],
-    //     dogDetail: {},
-    //     sortFilter: {
-    //         sortType: "all",
-    //         filterTemps: "all",
-    //         filterApiDB: "all"
-    //     }
-    // }
-    
 let currentSortFilter = useSelector(state => state.sortFilter)
 const handleChangeSort = (e) => {
     e.preventDefault()
@@ -79,8 +62,8 @@ const handleChangeSort = (e) => {
 const handleChangeBdApi = (e) => {
     e.preventDefault()
     dispatch(filterCreatedDogs(e.target.value))
-    dispatch(filterByTemperament(currentSortFilter.filterTemps))
-    dispatch(sortBy(currentSortFilter.sortType))
+    // dispatch(filterByTemperament(currentSortFilter.filterTemps))
+    // dispatch(sortBy(currentSortFilter.sortType))
     setCurrentPage(1)
 }
 //----------------FILTER DB OR API-----------------//
@@ -89,9 +72,9 @@ const handleChangeBdApi = (e) => {
 const temperaments = useSelector(state => state.temperaments)
 const handleChangeTemperament = (e) => {
     e.preventDefault()
-    dispatch(filterCreatedDogs(currentSortFilter.filterApiDB))
+    // dispatch(filterCreatedDogs(currentSortFilter.filterApiDB))
     dispatch(filterByTemperament(e.target.value))
-    dispatch(sortBy(currentSortFilter.sortType))
+    // dispatch(sortBy(currentSortFilter.sortType))
     setCurrentPage(1)
 }
 //-------------END FILTER TEMPERAMENT-------------//
@@ -114,18 +97,18 @@ const handleChangeTemperament = (e) => {
                 <h1>Hola Nombre!</h1>
                 <span>
                     <h2>Get Dogs By:</h2>
-                    <select defaultValue={"all"} onChange={(e) => handleChangeBdApi(e)}>
+                    <select onChange={(e) => handleChangeBdApi(e)}>
                         <option value='all'>All Dogs</option>
-                        <option value='DB'>Created</option>
                         <option value='API'>API</option>
+                        <option value='DB'>Created</option>
                     </select>
                 </span>
                 <span>
                     <h2>Filter by Temperaments: </h2>
-                    <select onChange={(e) => handleChangeTemperament(e)} name='filterByTemp' defaultValue={"all"}>
-                        <option value="all">Temperaments</option>
-                        {temperaments.map(t => (
-                        <option value={t.name}>{t.name}</option>
+                    <select onChange={(e) => handleChangeTemperament(e)} value="all" >
+                        <option >Temperaments</option>
+                        {temperaments && temperaments.map(t => (
+                        <option value={t.name} key={t.id}>{t.name}</option>
                         ))}
                     </select>
                 </span>
@@ -170,3 +153,10 @@ const handleChangeTemperament = (e) => {
     )
 }
 
+
+{/* <select onChange={(e) => handleChangeTemperament(e)} name='filterByTemp' defaultValue={"all"}>
+                        <option value="all">Temperaments</option>
+                        {temperaments.map(t => (
+                        <option value={t.name}>{t.name}</option>
+                        ))}
+                    </select> */}
