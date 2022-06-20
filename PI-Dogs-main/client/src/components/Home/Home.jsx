@@ -58,7 +58,7 @@ function handleClick(e){
 //--------------------INIT SORT----------------------//
 // const sortFilter = useSelector(state => state.sortFilter.filterApiDB)
 
-let currentSortFilter = useSelector(state => state.sortFilter)
+// let currentSortFilter = useSelector(state => state.sortFilter)
 const handleChangeSort = (e) => {
     e.preventDefault()
     dispatch(sortBy(e.target.value))
