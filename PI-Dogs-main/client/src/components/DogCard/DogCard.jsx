@@ -9,16 +9,16 @@ export default function DogCard ({id, image, name, minWeight, maxWeight, tempera
     return (
         <Link to={`/home/${id}`} onClick={() => dispatch(getDogDetail(id))}>
             <div className="Cardy" >
-                 <img className="dog-img" src={image} alt="dog-img" height="200px"/>
-                 <h1 className="dog-name" >{name}</h1>
-                 <div>
-                     <h3>Weight</h3>
-                     <p key={id}>{`${minWeight}Kg - ${maxWeight}Kg`}</p>
-                 </div>
+                <img className="dog-img" src={image} alt="dog-img" height="200px"/>
+                <h1 className="dog-name" >{name}</h1>
+                <div>
+                    <h3>Weight</h3>
+                    <p key={id}>{`${minWeight}Kg - ${maxWeight}Kg`}</p>
+                </div>
                  {/* <h1 className="dog-name" >{temperaments}</h1> */}
-                 <h3>
+                <h3>
                     {was_created
-                        ? temperaments.map((e) => e.name) // ["","",""]
+                        ? temperaments.map((e) => e.name).join(", ") // ["","",""]
                         : temperaments
                         ? temperaments
                         : "🤷‍♂️ No temperaments provided for this breed 🤷‍♀️"}
@@ -26,9 +26,9 @@ export default function DogCard ({id, image, name, minWeight, maxWeight, tempera
 
                  {/* <h3>Temperaments:</h3> */}
                  {/* <h3>Temperament: {!was_created? temperaments : temperaments.map(t => t.name)}</h3> */}
-                 {/* <div className="temp-container">{temperaments.split(", ").map((d, i) => (
-                     <span className="temperaments" key={i}>{d}</span>
-                 ))}
+                {/* <div className="temp-container">{temperaments.split(", ").map((d, i) => (
+                    <span className="temperaments" key={i}>{d}</span>
+                ))}
                 </div> */}
             </div>
         </Link>

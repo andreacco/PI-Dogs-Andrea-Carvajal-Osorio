@@ -11,6 +11,7 @@ export default function Home() {
     useEffect(() => {
         dispatch(getAllDogs())
         dispatch(getTemperaments())
+        // dispatch(sortBy("nameAsc"))
     }, [dispatch])
 //-------------------INIT PAGINADO----------------------//
     const allDogs = useSelector((state) => state.dogs)
@@ -27,14 +28,23 @@ export default function Home() {
     }
 //-------------------END PAGINADO---------------------//
 
+//----------------INIT RECARGAR PERROS---------------//
+
+function handleClick(e){
+    e.preventDefault()
+    dispatch(getAllDogs())
+}
+
+//---------------END RECARGAR PERROS-----------------//
+
 //-----------------INIT SEARCH BAR--------------------//
     const [input, setInput] = useState('')
     
     const handleChange = (e) => {
         e.preventDefault()
         setInput(e.target.value)
-        dispatch(searchDog(e.target.value))
-        setCurrentPage(1)
+        // dispatch(searchDog(e.target.value))
+        // setCurrentPage(1)
     }
 
     const handleSubmit = (e) => {
@@ -84,12 +94,13 @@ const handleChangeTemperament = (e) => {
         <div>
             <div>
                 <h1>Wikidogs</h1>
+                <button onClick={e => handleClick(e)}>Relaod Dogs</button>
                 <form onSubmit={e => handleSubmit(e)}>
                     <input 
                         type="text" 
                         placeholder="Search by breed"
                         name="name" 
-                        value={input} 
+                        value={input}
                         onChange={e => handleChange(e)}
                         onKeyPress={e => e.key === "Enter" && handleSubmit(e)}
                     />
@@ -114,7 +125,7 @@ const handleChangeTemperament = (e) => {
                 </span>
                 <span>
                     <h2>Sort By: </h2>
-                    <select defaultValue={"nameAsc"} onChange={(e) => handleChangeSort(e)}>
+                    <select defaultValue="nameAsc" onChange={(e) => handleChangeSort(e)}>
                         <option value="nameAsc">Name A-Z</option>
                         <option value="nameDesc">Name Z-A</option>
                         <option value="weightAsc">Min/Max Weight</option>

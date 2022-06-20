@@ -101,7 +101,7 @@ export default function CreateDog(){
             err.name = "Only capital and lower case letters";
           } else if (value.name.includes("-") || value.name.charAt(value.name.length - 1) == " " || value.name.charAt(0) == " ") {
             err.name = "Enter a valid name, mix of capital and lower case!";
-          }
+        }
         
         //--------------------END NAME------------------------//
         
@@ -112,8 +112,8 @@ export default function CreateDog(){
             err.max_height = "Max Height required"
         }
         else if(!Number(value.min_height) && !Number(value.max_height)){
-              err.min_height = "Value needs to be a Number"
-              err.max_height = "Value needs to be a Number"
+            err.min_height = "Value needs to be a Number"
+            err.max_height = "Value needs to be a Number"
             }
         else if(value.min_height < 10 || value.min_height > 99){
             err.min_height= 'The minimum height of the dog must contain at least 2 digits'
@@ -139,7 +139,7 @@ export default function CreateDog(){
             err.min_weight = "Value needs to be a Number"
             err.max_weight = "Value needs to be a Number"
         }
-        else if(value.min_weight < 1 || value.min_weight > 99){
+        else if(value.min_weight <= 1 || value.min_weight > 99){
             err.min_weight= 'The minimum weight of the dog must contain a maximum of 2 digits';
         }
         else if(value.min_weight > value.max_weight){
@@ -148,7 +148,7 @@ export default function CreateDog(){
         if(!value.max_weight){
             err.max_weight= 'The maximum weight of the dog is required'
         }
-        else if(value.max_weight < 1 || value.max_weight > 99){
+        else if(value.max_weight <= 1 || value.max_weight > 99){
             err.max_weight= 'The maximum weight of the dog must contain a maximum of 2 digits';
         }
         else if(value.min_weight > value.max_weight){

@@ -113,6 +113,7 @@ require('dotenv').config();
 
     const addDog = async (name, min_height, max_height, min_weight, max_weight, life_span_min, life_span_max, temperaments, image) => {
         // Va a crear un perro nuevo desde el form de crear perro y guardarlo en la base de datos perro, con la relación con sus temperamentos
+        console.log(temperaments)
         if(name && min_height && max_height && min_weight && max_weight && temperaments) {
             const createDog = await Dog.create({
                 name: name, 
@@ -127,6 +128,7 @@ require('dotenv').config();
             const newTemp = await Temperament.findAll({
                     where: { name: temperaments }, // aquí busco todos los temperamentos que coincidan con os que ya tengo en mi base de datos y los que me entran por parametro
                 });
+                console.log(newTemp)
                 return await createDog.addTemperament(newTemp); // ahora le digo que le agregue el temperamento al perro que cree arriba con los temperamentos en parametros
         }
         else {
@@ -145,15 +147,21 @@ require('dotenv').config();
         // console.log(temp)
         temp = await temp.join(", ").split(", ").sort() // los uno todos separandolos por coma y espacio, y luego los pongo en un arreglo cada uno como un string sin contar la coma y el espacio entre ellos.
         // console.log(temp)
-        let noRepeat = [];
-        for (let i = 0; i < temp.length; i++) {
-            const currentTemp = temp[i];
-            if(!noRepeat.includes(currentTemp)) {
-                noRepeat.push(currentTemp)
-            }
-        }
-        // let temperamentsSet = new Set (temp) // el Set guarda valores unicos en un obj 
-        let fullTemps = noRepeat.filter(Boolean) // elimino los strings vacios de mi array
+        let fullTemps = temp.filter(Boolean) // elimino los strings vacios de mi array
+        let temperamentsSet = new Set (fullTemps) // el Set guarda valores unicos en un obj 
+        temperamentsSet.forEach(e => {
+            Temperament.findOrCreate({
+                where: { name: e }
+            })
+        })
+        
+        // let noRepeat = [];
+        // for (let i = 0; i < temp.length; i++) {
+        //     const currentTemp = temp[i];
+        //     if(!noRepeat.includes(currentTemp)) {
+        //         noRepeat.push(currentTemp)
+        //     }
+        // }
         // console.log(fullTemps)
         // console.log(fullTemps.length)
 
@@ -162,12 +170,13 @@ require('dotenv').config();
         // });
 
         // const allTemperaments = await Temperament.findAll()
+        let temperamentsDb =  await Temperament.findAll()
 
-        fullTemps = fullTemps.map(temper => ({ name: temper }));
+        // fullTemps = fullTemps.map(temper => ({ name: temper }));
         
-        const allTemperaments = await Temperament.bulkCreate(fullTemps);
+        // const allTemperaments = await Temperament.bulkCreate(fullTemps);
         // console.log(allTemperaments)
-        return allTemperaments;
+        return temperamentsDb;
     };
 
     const filterByDescName = async () => {

@@ -6,7 +6,6 @@ const initialState = {
     allDogs: [],
     temperaments: [],
     dogDetail: {},
-    filtered: [],
     sortFilter: { // Aqui es donde voy a guardar el filtro actual que quiere ver el cliente, asi es como puedo hacer todos los filtros a la vez
         // los ordenamientos son: 'nameAsc', 'nameDesc', 'weightAsc', 'weightDesc'
         sortType: "all", // este es mi caso default de los ordenamientos pero va a ir cambiando segun lo que el cliente quiera ven en pantalla
@@ -22,9 +21,8 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_DOGS:
             return {
                 ...state, 
-                dogs: action.payload,
-                allDogs: action.payload,
-                filtered: action.payload
+                dogs: action.payload.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1),
+                allDogs: action.payload
             }
             
         case GET_DOG_DETAIL:
@@ -80,12 +78,11 @@ const rootReducer = (state = initialState, action) => {
             // }
 
         case FILTER_BY_TEMPERAMENT:
-          const filter = action.payload === 'all' ? state.filtered : state.filtered?.filter(data => data.temperaments?.includes(action.payload));
-          return{
-              ...state,
-              dogs: filter,
-              
-          }
+            const filter = action.payload === 'all' ? state.allDogs : state.allDogs?.filter(data => data.temperaments?.includes(action.payload));
+            return{
+                ...state,
+                dogs: filter,
+            }
             // const filteredDogsTemp = action.payload === 'all' ? state.dogs : state.dogs.filter((d) => {
             //     return d.temperaments && d.temperaments.includes(action.payload)
             // });
@@ -100,21 +97,21 @@ const rootReducer = (state = initialState, action) => {
 
         case SORT_BY:
             let sort = [];
-        if(action.payload === "all") {
-            return {
-                ...state,
-                dogs: state.allDogs,
-                sortFilter: {
-                    ...state.sortFilter,
-                    sortType: "all"
-                }
-            }
-        }
+        // if(action.payload === "all") 
+        //     return {
+        //         ...state,
+        //         dogs: state.allDogs,
+        //         sortFilter: {
+        //             ...state.sortFilter,
+        //             sortType: "all"
+        //         }
+        //     }
+        // 
         if(action.payload === "nameAsc") {
-            sort = state.dogs.sort((a, b) => a.name > b.name ? 1 : -1);
+            sort = state.dogs.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
         }
         if(action.payload === "nameDesc") {
-            sort = state.dogs.sort((a, b) => a.name > b.name ? -1 : 1);
+            sort = state.dogs.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1)
         }
         if(action.payload === "weightAsc"){
             sort = state.dogs.sort((a, b) => {
@@ -160,7 +157,7 @@ const rootReducer = (state = initialState, action) => {
             dogs: [...sort],
             sortFilter: {
                 ...state.sortFilter,
-                sortType: sort
+                sortType: action.payload
             }
         }
 
