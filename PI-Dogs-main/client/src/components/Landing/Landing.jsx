@@ -8,24 +8,16 @@ export default function Landing(){
             <div className = "Card">
                 <h1 className = "title">Wikidogs</h1>
                 <h2 className = "description">Welcome Doggie Lovers!!</h2>
-                <div className = "wrap">
-                    <form className="formulario" name="insertName">
-                        <div className="input-group">
-                            <input id = "nombre" type="text" name="name"/>
-                            <label className = "label" for = "campoNombre">Type your Name</label>
-                        </div>
-                        <div className="button">
-                            <Link to = "/home">
-                                <button className = "boton">
-                                    <span className = "dog">
-                                        <span className="flecha">
-                                        </span>
+                <div className="button">
+                    <Link to = "/home">
+                        <button className = "boton">
+                                <span className = "dog">
+                                    <span className="flecha">
                                     </span>
-                                    <span className="texto-boton" >Lets Woof!</span>
-                                </button>
-                            </Link>
-                        </div>
-                    </form>
+                                </span>
+                                <span className="texto-boton" >Lets Woof!</span>
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getDogDetail, clearDogDetail } from "../../redux/Actions";
+import './DogDetails.css'
 
 export default function DogDetail(props) {
     const dispatch = useDispatch()
@@ -18,41 +19,44 @@ export default function DogDetail(props) {
     }, [index, dispatch])
 
     return (
-        <div>
-            {Object.values(dog).length >0 ?
-            <div>
-                <img src={dog.image} alt="dog-img" height="200px"/>
-                <h1>{dog.name}</h1>
-                <h2>Weight:</h2>
-                {dog.min_weight
-                    ? dog.min_weight
-                    : "There's no weight provided for this dog"}{" - "}
-                {dog.max_weight
-                    ? `${dog.max_weight} Kg`
-                    : "There's no weight provided for this dog"}
-                <h2>Height:</h2>
-                <h3>{`${dog.min_height} - ${dog.max_height} cm`}</h3>
-                <h2>Life Span: </h2>
-                {dog.life_span_min || dog.life_span_max
-                    ? dog.life_span_min !== dog.life_span_max
-                    ? `${dog.life_span_min} - ${dog.life_span_max} years`
-                    : `${dog.life_span_min} years`
-                    : "There's no Life Span provided for this dog!"}
-                {/* <h3>Temperament: {!dog.was_created? dog.temperaments : dog.temperaments.map(t => t.name)}</h3> */}
-                <h3>
-                    {dog.was_created
-                        ? dog.temperaments.map((e) => e.name).join(", ")
-                        : dog.temperaments
-                        ? dog.temperaments
-                        : "🤷‍♂️ No temperaments provided for this breed 🤷‍♀️"}
-                </h3>
-                {/* <div>{dog.temperaments.split(", ").map((t, i) => (
+        <div className="card">
+            {Object.values(dog).length > 0 ?
+                <div>
+                    <img src={dog.image} alt="dog-img" height="200px" />
+                    <h1>{dog.name}</h1>
+                    <h2>Weight:</h2>
+                    {dog.min_weight
+                        ? dog.min_weight
+                        : "There's no weight provided for this dog"}{" - "}
+                    {dog.max_weight
+                        ? `${dog.max_weight} Kg`
+                        : "There's no weight provided for this dog"}
+                    <h2>Height:</h2>
+                    <h3>{`${dog.min_height} - ${dog.max_height} cm`}</h3>
+                    <h2>Life Span: </h2>
+                    {dog.life_span_min || dog.life_span_max
+                        ? dog.life_span_min !== dog.life_span_max
+                            ? `${dog.life_span_min} - ${dog.life_span_max} years`
+                            : `${dog.life_span_min} years`
+                        : "There's no Life Span provided for this dog!"}
+                    {/* <h3>Temperament: {!dog.was_created? dog.temperaments : dog.temperaments.map(t => t.name)}</h3> */}
+                    <h3>
+                        {dog.was_created
+                            ? dog.temperaments.map((e) => e.name).join(", ")
+                            : dog.temperaments
+                                ? dog.temperaments
+                                : "🤷‍♂️ No temperaments provided for this breed 🤷‍♀️"}
+                    </h3>
+                    {/* <div>{dog.temperaments.split(", ").map((t, i) => (
                     key={i}>{t}
                     ))}
                 </div> */}
-            </div> : <p>Loading...</p>}
-            <Link to = "/home">
-                <button>Go Back</button>
+                </div> : <p>Loading...</p>}
+            <Link to="/home">
+                <button data-text="Awesome" class="button">
+                    <span class="actual-text">&nbsp;Go Back&nbsp;</span>
+                    <span class="hover-text" aria-hidden="true">&nbsp;Go Back&nbsp;</span>
+                </button>
             </Link>
         </div>
     )
