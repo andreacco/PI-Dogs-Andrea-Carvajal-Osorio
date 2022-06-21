@@ -1,36 +1,23 @@
-.Card {
-    background: rgba(249, 222, 201, .6);
-    border-width: 2px;
-    border-color: rgb(81, 63, 49);
-    border-style: solid;
-    border-radius: 25px;
-    text-align: center;
-    color: black;
-    width: 400px;
-    height: 400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -200px 0 0 -200px;
-}
-
 .DogName {
     font-family: 'Nuosu SIL', serif;
     font-size: 25px;
 }
 
-/* ESTILOS DESDE: https://uiverse.io/detail/alexruix/cowardly-ape-35
-    /* From uiverse.io by @alexruix */
+/* ESTILOS DESDE: https://uiverse.io/detail/alexruix/cowardly-ape-35 */
 .Cardy {
-    width: 190px;
-    height: 254px;
+    width: 300px;
+    height: 400px;
     border-radius: 20px;
-    background: #f5f5f5;
+    background: #87b6bb;
     position: relative;
-    padding: 1.8rem;
+    padding: 10px;
     border: 2px solid #c3c6ce;
     transition: 0.5s ease-out;
     overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
    }
    
    .Cardy-details {
@@ -39,32 +26,24 @@
     gap: .5em;
     display: grid;
     place-content: center;
-   }
-   
-   .Cardy-button {
-    transform: translate(-50%, 125%);
-    width: 60%;
-    border-radius: 1rem;
-    border: none;
-    background-color: #008bf8;
-    color: #fff;
-    font-size: 1rem;
-    padding: .5rem 1rem;
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    opacity: 0;
-    transition: 0.3s ease-out;
+    /* align-items: center; */
+    /* text-decoration: none; */
    }
    
    .dogDetails {
-    color: rgb(134, 134, 134);
+    color: rgb(0, 0, 0);
    }
    
    /*Text*/
    .dog-name {
+    color: rgb(0, 0, 0);
     font-size: 1.5em;
     font-weight: bold;
+    text-decoration: none;
+   }
+   
+   .dog-img {
+    border-radius: 15px;
    }
    
    /*Hover*/
@@ -72,8 +51,3 @@
     border-color: #008bf8;
     box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
    }
-   
-   /* .Cardy:hover .Cardy-button {
-    transform: translate(-50%, 50%);
-    opacity: 1;
-   } */

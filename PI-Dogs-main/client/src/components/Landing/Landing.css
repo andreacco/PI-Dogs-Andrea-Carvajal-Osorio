@@ -26,163 +26,69 @@
     font-family: 'Nuosu SIL', serif;
     font-size: 60px;
 }
+.button {
+    position: absolute;
+    top: 15%;
+    /* margin-top: -25px; */
+}
 
 .description {
-    font-size: 25px;
+    font-size: 30px;
 }
-
-.formulario {
-    width: 100%;
-    margin: auto;
-}
-    
-.input-group {
+/* From uiverse.io by @alexmaracinaru */
+.cta {
     position: relative;
-    margin-bottom: 32px;
-}
-.input-group input[type="text"]{
-    font-family: "Roboto";
-    font-size: 16px;
-    color: #303F9F;
-    width: 300px;
-    outline: none;
-    padding: 15px;
-    background: none;
+    margin: auto;
+    padding: 12px 18px;
+    transition: all 0.2s ease;
     border: none;
-    border-bottom: 2px solid #BBDEFB; 
-}
-
-.input-group input[type="text"]:focus, .input-group input[type="text"]:active {
-    outline: none;
-    border-bottom: 2px solid #303F9F;
-}
-
-.input-group input[type="text"].error {
-    border-bottom: 2px solid #D32F2F;
-}
-.input-group input[type="text"].error + label{
-    color: #D32F2F;
-}
-
-.input-group label {
-    color: #303F9F; 
-}
-
-.input-group label.label {
-    -webkit-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    margin-left: 15px;
-    font-size: 16px;
-    line-height: 16px;
-    position: absolute;
-    top: 16px;
-    left: 0;
-}
-
-.input-group label.label.active {
-    top: -12px;
-    font-size: 12px;
-    line-height: 12px;
-    color: #B6B6B6;
-}
-
-.input-group.error label {
-    color: #D32F2F;
-}
-
-.input-group.error label:hover {
-    background: rgba(211, 47, 47, 0.2);
-}
-
-.input-group.error label:before {
-    border: 2px solid #D32F2F;
-}
-
-button {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    outline: none;
-    border: 0;
-    vertical-align: middle;
-    text-decoration: none;
-    background: transparent;
-    padding: 0;
-    font-size: inherit;
-    font-family: inherit;
-}
-
-button.boton {
-    width: 12rem;
-    height: auto;
-}
-
-button.boton .dog {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    position: relative;
-    display: block;
-    margin: 0;
-    width: 3rem;
-    height: 3rem;
-    background: #282936;
-    border-radius: 1.625rem;
-}
-
-button.boton .dog .icon {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    background: #fff;
-}
-
-button.boton .dog .icon.arrow {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    left: 0.625rem;
-    width: 1.125rem;
-    height: 0.125rem;
     background: none;
-}
-
-button.boton .dog .icon.arrow::before {
-    position: absolute;
+   }
+   
+   .cta:before {
     content: "";
-    top: -0.29rem;
-    right: 0.0625rem;
-    width: 0.625rem;
-    height: 0.625rem;
-    border-top: 0.125rem solid #fff;
-    border-right: 0.125rem solid #fff;
-    transform: rotate(45deg);
-}
-
-button.boton .texto-boton {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 0.75rem 0;
-    margin: 0 0 0 1.85rem;
-    color: #282936;
+    display: block;
+    border-radius: 50px;
+    background: #b1dae7;
+    width: 45px;
+    height: 45px;
+    transition: all 0.3s ease;
+   }
+   
+   .cta span {
+    position: relative;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 18px;
     font-weight: 700;
-    line-height: 1.6;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-button:hover .dog {
+    letter-spacing: 0.05em;
+    color: #234567;
+   }
+   
+   .cta svg {
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #234567;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+   }
+   
+   .cta:hover:before {
     width: 100%;
-}
-
-button:hover .dog .icon.arrow {
-    background: #fff;
-    transform: translate(1rem, 0);
-}
-
-button:hover .texto-boton {
-    color: #fff;
-}
+    background: #b1dae7;
+   }
+   
+   .cta:hover svg {
+    transform: translateX(0);
+   }
+   
+   .cta:active {
+    transform: scale(0.95);
+   }

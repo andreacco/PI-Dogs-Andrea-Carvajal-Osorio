@@ -34,6 +34,7 @@ export default function Home() {
     function handleClick(e) {
         e.preventDefault()
         dispatch(getAllDogs())
+        setCurrentPage(1)
     }
 
     //---------------END RECARGAR PERROS-----------------//
@@ -152,6 +153,13 @@ export default function Home() {
                         />
                     </form>
                 </div>
+                <div>
+                <Pagination
+                    dogsPerPage={dogsPerPage}
+                    allDogs={allDogs.length}
+                    paginate={paginate}
+                />
+            </div>
             </div>
             <div>
                 {currentDog.length === 0 && currentDog ? <p>Loading...</p> :
@@ -170,13 +178,6 @@ export default function Home() {
                         )
                     })
                 }
-            </div>
-            <div>
-                <Pagination
-                    dogsPerPage={dogsPerPage}
-                    allDogs={allDogs.length}
-                    paginate={paginate}
-                />
             </div>
         </div>
     )
