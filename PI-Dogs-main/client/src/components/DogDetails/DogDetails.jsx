@@ -6,7 +6,8 @@ import "./DogDetails.css";
 
 export default function DogDetail(props) {
   const dispatch = useDispatch();
-  const index = props.match.params.id;
+  // console.log(props.match.params)
+  const index = props.match.params.dogId
 
   const dog = useSelector((state) => state.dogDetail);
 
@@ -55,14 +56,14 @@ export default function DogDetail(props) {
                 </div> */}
         </div>
       ) : (
-        <div class="loader">
-          <div class="loader-square"></div>
-          <div class="loader-square"></div>
-          <div class="loader-square"></div>
-          <div class="loader-square"></div>
-          <div class="loader-square"></div>
-          <div class="loader-square"></div>
-          <div class="loader-square"></div>
+        <div className="loader">
+          <div className="loader-square"></div>
+          <div className="loader-square"></div>
+          <div className="loader-square"></div>
+          <div className="loader-square"></div>
+          <div className="loader-square"></div>
+          <div className="loader-square"></div>
+          <div className="loader-square"></div>
         </div>
       )}
       <Link to="/home">

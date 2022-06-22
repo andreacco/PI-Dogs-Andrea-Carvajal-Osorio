@@ -164,14 +164,14 @@ export default function Home() {
             </div>
             <div>
                 <ul className="grid">
-                    {currentDog.length === 0 && currentDog ? <div class="loader">
-                        <div class="loader-square"></div>
-                        <div class="loader-square"></div>
-                        <div class="loader-square"></div>
-                        <div class="loader-square"></div>
-                        <div class="loader-square"></div>
-                        <div class="loader-square"></div>
-                        <div class="loader-square"></div>
+                    {currentDog.length === 0 && currentDog ? <div className="loader">
+                        <div className="loader-square"></div>
+                        <div className="loader-square"></div>
+                        <div className="loader-square"></div>
+                        <div className="loader-square"></div>
+                        <div className="loader-square"></div>
+                        <div className="loader-square"></div>
+                        <div className="loader-square"></div>
                     </div> :
                         currentDog.map((d) => {
                             return (

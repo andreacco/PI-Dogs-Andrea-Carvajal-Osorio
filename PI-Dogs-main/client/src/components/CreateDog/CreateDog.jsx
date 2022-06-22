@@ -116,16 +116,16 @@ export default function CreateDog() {
             err.min_height = "Value needs to be a Number"
             err.max_height = "Value needs to be a Number"
         }
-        else if (value.min_height < 10 || value.min_height > 99) {
+        else if (Number(value.min_height) < 10 || Number(value.min_height) > 99) {
             err.min_height = 'The minimum height of the dog must contain at least 2 digits'
         }
-        else if (value.min_height > value.max_height) {
+        else if (Number(value.min_height) > Number(value.max_height)) {
             err.min_height = 'The minimum height of the breed cannot be greater than the maximum height'
         }
-        else if (value.max_height < 10 || value.max_height > 999) {
+        else if (Number(value.max_height) < 10 || Number(value.max_height) > 999) {
             err.max_height = 'The maximum height of the dog must contain 2 to 3 digits'
         }
-        else if (value.min_height > value.max_height) {
+        else if (Number(value.min_height) > Number(value.max_height)) {
             err.max_height = 'The maximum height of the breed cannot be less than the minimum height'
         }
         //--------------------END HEIGHT------------------------//
@@ -140,22 +140,22 @@ export default function CreateDog() {
             err.min_weight = "Value needs to be a Number"
             err.max_weight = "Value needs to be a Number"
         }
-        else if (value.min_weight <= 1 || value.min_weight > 99) {
+        else if (Number(value.min_weight) <= 1 || Number(value.min_weight) > 99) {
             err.min_weight = 'The minimum weight of the dog must contain a maximum of 2 digits';
         }
-        else if (value.min_weight > value.max_weight) {
+        else if (Number(value.min_weight) > Number(value.max_weight)) {
             err.min_weight = 'The minimum weight of the dog cannot be greater than the maximum weight';
         }
         if (!value.max_weight) {
             err.max_weight = 'The maximum weight of the dog is required'
         }
-        else if (value.max_weight <= 1 || value.max_weight > 99) {
+        else if (Number(value.max_weight) <= 1 || Number(value.max_weight) > 99) {
             err.max_weight = 'The maximum weight of the dog must contain a maximum of 2 digits';
         }
-        else if (value.min_weight > value.max_weight) {
+        else if (Number(value.min_weight) > Number(value.max_weight)) {
             err.max_weight = 'The maximum weight of the dog cannot be less than the minimum weight';
         }
-        else if (value.min_weight > 9 && value.max_weight < 10) {
+        else if (Number(value.min_weight) > 9 && Number(value.max_weight) < 10) {
             err.max_weight = 'The maximum weight of the dog cannot be less than the minimum weight'
         }
 
@@ -167,16 +167,16 @@ export default function CreateDog() {
             err.life_span_min = "Value needs to be a Number"
             err.life_span_max = "Value needs to be a Number"
         }
-        else if (value.life_span_min < 1 || value.life_span_min > 99) {
+        else if (Number(value.life_span_min) < 1 || Number(value.life_span_min) > 99) {
             err.life_span_min = 'The minimum years of life of the dog must contain 1 to 2 digits'
         }
-        else if (value.life_span_min > value.life_span_max) {
+        else if (Number(value.life_span_min) > Number(value.life_span_max)) {
             err.life_span_min = 'The minimum life span of the dog cannot be greater than the maximum'
         }
-        else if (value.life_span_max < value.life_span_min) {
+        else if (Number(value.life_span_max) < Number(value.life_span_min)) {
             err.life_span_max = 'The maximum life span of the dog cannot be less than the minimum'
         }
-        else if (value.life_span_min > 9 && value.life_span_max < 10) {
+        else if (Number(value.life_span_min) > 9 && Number(value.life_span_max) < 10) {
             err.life_span_max = 'The maximum life span of the dog cannot be less than the minimum'
         }
 

@@ -22,4 +22,43 @@ CONTEO:  1, 2,  3,  4,  5,  6,  7,  8
         [8, 9, 10, 11, 12, 13, 14, 15]
     */
 
-
+// const dogsApi = await listDogsApi()
+        // const dogsDB = await listDogsBd()
+        // try {
+        //     if(isNaN(id)){ // si NO es un numero ---> string ---> bd
+        //         let doggy = await dogsDB.find(d => d.id === id)
+        //         // await Dog.findByPk(id) 
+        //         //     {
+        //         //     // include:
+        //         //     // {
+        //         //     //     model: Temperament,
+        //         //     //     attributes: ['name'],
+        //         //     //     through: {
+        //         //     //         attributes: []
+        //         //     //     },
+        //         //     // }
+        //         // })
+        //         let foundedDb = doggy? doggy : console.log('Not founded doggy')
+        //         console.log(foundedDb)
+        //         return foundedDb
+        //     } else {
+        //         const dogExists = await dogsApi.find(d => d.id === Number(id)); // el id que entra por parametros es un string y el que me trae la api es un number, esto lo soluciono pasando el id de la api a string y alli los comparo
+        //         let foundedApi = dogExists? dogExists : console.log('Not founded doggy')
+        //         console.log(foundedApi)
+        //         return foundedApi;
+        //     }
+        // } catch (error) {
+        //     console.log(error)
+        // }
+        // try {
+        //     if(!isNaN(id)){
+        //         let oneDog = dogsList.find(d => d.id === parseInt(id))
+        //         return oneDog
+        //     }
+        //     let oneDogDb = dogsList.find(d => d.id === id)
+        //         return oneDogDb
+        //     }
+        //     catch (error) {
+        //     console.log(error)
+        // }
+        
