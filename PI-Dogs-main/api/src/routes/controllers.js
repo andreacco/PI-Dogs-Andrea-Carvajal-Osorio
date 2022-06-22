@@ -113,22 +113,22 @@ require('dotenv').config();
 
     const addDog = async (name, min_height, max_height, min_weight, max_weight, life_span_min, life_span_max, temperaments, image) => {
         // Va a crear un perro nuevo desde el form de crear perro y guardarlo en la base de datos perro, con la relación con sus temperamentos
-        console.log(temperaments)
+        // console.log(temperaments) // llega como [ 'Boisterous', 'Athletic', 'Calm', 'Amiable' ] 
         if(name && min_height && max_height && min_weight && max_weight && temperaments) {
             const createDog = await Dog.create({
-                name: name, 
+                name, 
                 min_height,
                 max_height, 
                 min_weight, 
                 max_weight, 
                 life_span_min,
                 life_span_max,
-                image
+                image: image? image : 'https://i.pinimg.com/474x/d8/c0/52/d8c0529ad3f1baf0cb17a9534172b948--smiling-animals-smiling-dogs.jpg'
             });
             const newTemp = await Temperament.findAll({
                     where: { name: temperaments }, // aquí busco todos los temperamentos que coincidan con os que ya tengo en mi base de datos y los que me entran por parametro
                 });
-                console.log(newTemp)
+                // console.log(newTemp)
                 return await createDog.addTemperament(newTemp); // ahora le digo que le agregue el temperamento al perro que cree arriba con los temperamentos en parametros
         }
         else {
@@ -143,12 +143,12 @@ require('dotenv').config();
         // Así me llega la info:
         //     "temperament": "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
         const temperamentApi = await listDogsApi();
-        let temp = temperamentApi.map((d) => d.temperaments) // la data me llega como: ["temp 1, temp2, temp3", "temp 4, temp5"...] 
+        let temp = temperamentApi.map((d) => d.temperaments) // la data me llega como: ["temp 1, temp2, temp3", "temp 4, temp5"...] ---> ""temp 1, temp2, temp3", "temp 4, temp5""  ---> "temp 1", "temp2", "temp3", "temp 4", "temp5" 
         // console.log(temp)
         temp = await temp.join(", ").split(", ").sort() // los uno todos separandolos por coma y espacio, y luego los pongo en un arreglo cada uno como un string sin contar la coma y el espacio entre ellos.
         // console.log(temp)
         let fullTemps = temp.filter(Boolean) // elimino los strings vacios de mi array
-        let temperamentsSet = new Set (fullTemps) // el Set guarda valores unicos en un obj 
+        let temperamentsSet = new Set (fullTemps) // el Set guarda valores unicos en un objeto 
         temperamentsSet.forEach(e => {
             Temperament.findOrCreate({
                 where: { name: e }
@@ -165,16 +165,11 @@ require('dotenv').config();
         // console.log(fullTemps)
         // console.log(fullTemps.length)
 
-        // fullTemps.forEach( async name => {
-        //     await Temperament.create({ name })
-        // });
-
-        // const allTemperaments = await Temperament.findAll()
         let temperamentsDb =  await Temperament.findAll()
 
         // fullTemps = fullTemps.map(temper => ({ name: temper }));
         
-        // const allTemperaments = await Temperament.bulkCreate(fullTemps);
+        // const allTemperaments = await Temperament.bulkCreate(fullTemps); // no los tengo que pasar uno por uno porque añade directamente todo mi array a la base de datos en formato objeto con su key value
         // console.log(allTemperaments)
         return temperamentsDb;
     };

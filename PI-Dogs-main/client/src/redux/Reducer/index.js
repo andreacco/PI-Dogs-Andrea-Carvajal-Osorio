@@ -67,46 +67,26 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 dogs: createdFilter,
             };
-            // const filteredDogs = action.payload === "DB" ? state.allDogs.filter(dog => dog.was_created) : state.allDogs.filter(dog => !dog.was_created)
-            // return {
-            //     ...state,
-            //     dogs: action.payload === "all" ? state.allDogs : filteredDogs,
-            //     sortFilter: {
-            //         ...state.sortFilter,
-            //         filterApiDB: action.payload
-            //     }
-            // }
 
         case FILTER_BY_TEMPERAMENT:
-            const filter = action.payload === 'all' ? state.allDogs : state.allDogs?.filter(data => data.temperaments?.includes(action.payload));
+            const filter = action.payload === 'all' ? state.allDogs : state.allDogs.filter(data => data.temperaments?.includes(action.payload));
             return{
                 ...state,
                 dogs: filter,
             }
-            // const filteredDogsTemp = action.payload === 'all' ? state.dogs : state.dogs.filter((d) => {
-            //     return d.temperaments && d.temperaments.includes(action.payload)
-            // });
-            // return {
-            //     ...state,
-            //     dogs: filteredDogsTemp,
-            //     sortFilter: {
-            //         ...state.sortFilter,
-            //         filterTemps: action.payload
-            //     }
-            // }
 
         case SORT_BY:
             let sort = [];
-        // if(action.payload === "all") 
-        //     return {
-        //         ...state,
-        //         dogs: state.allDogs,
-        //         sortFilter: {
-        //             ...state.sortFilter,
-        //             sortType: "all"
-        //         }
-        //     }
-        // 
+        if(action.payload === "all") {
+            return {
+                ...state,
+                dogs: state.allDogs,
+                sortFilter: {
+                    ...state.sortFilter,
+                    sortType: action.payload
+                }
+            }
+        }
         if(action.payload === "nameAsc") {
             sort = state.dogs.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
         }

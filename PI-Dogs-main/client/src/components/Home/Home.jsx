@@ -12,7 +12,6 @@ export default function Home() {
     useEffect(() => {
         dispatch(getAllDogs())
         dispatch(getTemperaments())
-        // dispatch(sortBy("nameAsc"))
     }, [dispatch])
     //-------------------INIT PAGINADO----------------------//
     const allDogs = useSelector((state) => state.dogs)

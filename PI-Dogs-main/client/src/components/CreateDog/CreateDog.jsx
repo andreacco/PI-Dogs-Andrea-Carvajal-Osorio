@@ -210,7 +210,6 @@ export default function CreateDog() {
 
     return (
         <div className="CreateDogPage">
-            {/* <Link to="/home"><button>Go Back</button></Link> */}
             <div className="backButton">
                 <Link to="/home">
                     <button className="backo">
