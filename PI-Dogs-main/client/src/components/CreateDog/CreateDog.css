@@ -1,56 +1,201 @@
 .CreateDogPage {
     background-image: url(https://img.freepik.com/vector-gratis/fondo-colorido-modelo-huellas-pata-perro-o-gato_1017-30662.jpg);
-    width: 100%;
-    height: 505px;
-    background-size: 40%;
-    background-position: right;
-    background-position-y: bottom;
+    background-size: 40% cover;
+    background-position: center center;
+    height: 100vh;
+    position: relative;
 }
 
-/* ESTILOS DESDE: https://uiverse.io/detail/satyamchaudharydev/quick-chicken-50 */
-/* From uiverse.io by @satyamchaudharydev */
-/* === removing default button style ===*/
-.button {
-    margin: 0;
-    background: transparent;
-    padding: 0;
-    border: none;
+.backyyy {
+  text-decoration: none;
+  position: absolute;
+  border: none;
+  font-size: 14px;
+  font-family: inherit;
+  color: #fff;
+  width: 9em;
+  height: 3em;
+  line-height: 2em;
+  text-align: center;
+  background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+  background-size: 300%;
+  border-radius: 30px;
+  z-index: 1;
+ }
+ 
+ .backyyy:hover {
+  animation: ani 8s linear infinite;
+  border: none;
+ }
+ 
+ @keyframes ani {
+  0% {
+   background-position: 0%;
   }
-  
-  /* button styling */
-  .button {
-    --border-right: 6px;
-    --text-stroke-color: rgba(255,255,255,0.6);
-    --animation-color: #37FF8B;
-    --fs-size: 2em;
-    letter-spacing: 3px;
-    text-decoration: none;
-    font-size: var(--fs-size);
-    font-family: "Arial";
-    position: relative;
-    text-transform: uppercase;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--text-stroke-color);
+ 
+  100% {
+   background-position: 400%;
   }
-  /* this is the text, when you hover on button */
-  .hover-text {
+ }
+ 
+ .backyyy:before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: -1;
+  background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+  background-size: 400%;
+  border-radius: 35px;
+  transition: 1s;
+ }
+ 
+ .backyyy:hover::before {
+  filter: blur(20px);
+ }
+ 
+ .backyyy:active {
+  background: linear-gradient(32deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+ }
+
+ .Formyy {
+    background: rgba(249, 222, 201, .6);
+    border-width: 2px;
+    border-color: rgb(81, 63, 49);
+    border-style: solid;
+    border-radius: 25px;
+    text-align: center;
+    color: black;
+    width: 800px;
+    height: 600px;
     position: absolute;
-    box-sizing: border-box;
-    content: attr(data-text);
-    color: var(--animation-color);
-    width: 0%;
-    inset: 0;
-    border-right: var(--border-right) solid var(--animation-color);
-    overflow: hidden;
-    transition: 0.5s;
-    -webkit-text-stroke: 1px var(--animation-color);
-  }
-  /* hover */
-  .button:hover .hover-text {
-    width: 100%;
-    filter: drop-shadow(0 0 23px var(--animation-color))
-  }
+    top: 50%;
+    left: 50%;
+    margin: -300px 0 0 -400px;
+ }
+ .tempy {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  backdrop-filter: blur(4px);
+  margin-bottom: 3vh;
+  justify-content: center;
+  align-self: center;
+}
+.tempy button {
+  cursor: pointer;
+}
+.temp {
+  display: flex;
+  flex-direction: row;
+  gap: 2vh;
+  padding: 3vh;
+  background-color: rgba(2, 2, 2, 0.405);
+  color: rgb(248, 196, 98);
+  align-items: center;
+}
+.temp button {
+  background-color: rgba(228, 138, 78, 0.94);
+  color: white;
+  padding: 5px;
+  border-radius: 100%;
+  border: none;
+  width: 4vh;
+  height: 4vh;
+  transition: 0.5s;
+}
+.temp button:hover {
+  transform: scale(1.2);
+  transition: 0.5s;
+  color: red;
+  background-color: rgba(187, 126, 85, 0.94);
+}
 
-  /* BOTON PARA CREAR: https://uiverse.io/detail/adamgiebl/ugly-robin-41 */
+.backo {
+  align-items: center;
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  display: flex;
+  font-family: Phantomsans, sans-serif;
+  font-size: 18px;
+  justify-content: center;
+  line-height: 1em;
+  max-width: 100%;
+  min-width: 140px;
+  padding: 3px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all .3s;
+ }
+ 
+ .backo:active,
+ .backo:hover {
+  outline: 0;
+ }
+ 
+ .backo span {
+  background-color: rgb(5, 6, 45);
+  padding: 16px 24px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+ }
+ 
+ .backo:hover span {
+  background: none;
+ }
+ 
+ .backo:active {
+  transform: scale(0.9);
+ }
 
-  /* PENDIENTE BUSCAR EL FORM */
+
+.Cretop {
+  padding: 0.8em 1.8em;
+  border: 2px solid #0e3274;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  transition: .3s;
+  z-index: 1;
+  font-family: inherit;
+  color: #0e3274;
+  border-radius: 20px;
+ }
+ 
+ .Cretop::before {
+  content: '';
+  width: 0;
+  height: 300%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: #17C3B2;
+  transition: .5s ease;
+  display: block;
+  z-index: -1;
+ }
+ 
+ .Cretop:hover::before {
+  width: 105%;
+ }
+ 
+ .Cretop:hover {
+  color: #111;
+ }
+ 

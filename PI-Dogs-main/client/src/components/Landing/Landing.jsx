@@ -8,9 +8,9 @@ export default function Landing(){
             <div className = "Card">
                 <h1 className = "title">Wikidogs</h1>
                 <h2 className = "description">Welcome Doggie Lovers!!</h2>
-                <div className="button">
+                <div className="boton">
                     <Link to = "/home">
-                        <button className="cta">
+                        <button className="acta">
                             <span>Lets Woof!</span>
                             <svg viewBox="0 0 13 10" height="10px" width="15px">
                             <path d="M1,5 L11,5"></path>

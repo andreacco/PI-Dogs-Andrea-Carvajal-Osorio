@@ -211,70 +211,73 @@ export default function CreateDog() {
     return (
         <div className="CreateDogPage">
             {/* <Link to="/home"><button>Go Back</button></Link> */}
-            <Link to="/home">
-                <button data-text="Awesome" class="button">
-                    <span class="actual-text">&nbsp;Go Back&nbsp;</span>
-                    <span class="hover-text" aria-hidden="true">&nbsp;Go Back&nbsp;</span>
-                </button>
-            </Link>
-            <h1>Let's Create a Dog!!</h1>
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <div>
-                    <label>Breed Name: </label>
-                    <input type="text" name="name" value={input.name} onChange={(e) => handleChange(e)} />
-                    {error.name && (<p className="error">{error.name}</p>)}
-                </div>
-                <div>
-                    <label>Min Height: </label>
-                    <input type="number" name="min_height" value={input.min_height} onChange={(e) => handleChange(e)} />
-                    {error.min_height && (<p className="error">{error.min_height}</p>)}
-                </div>
-                <div>
-                    <label>Max Height: </label>
-                    <input type="number" name="max_height" value={input.max_height} onChange={(e) => handleChange(e)} />
-                    {error.max_height && (<p className="error">{error.max_height}</p>)}
-                </div>
-                <div>
-                    <label>Min Weight: </label>
-                    <input type="number" name="min_weight" value={input.min_weight} onChange={(e) => handleChange(e)} />
-                    {error.min_weight && (<p className="error">{error.min_weight}</p>)}
-                </div>
-                <div>
-                    <label>Max Weight: </label>
-                    <input type="number" name="max_weight" value={input.max_weight} onChange={(e) => handleChange(e)} />
-                    {error.max_weight && (<p className="error">{error.max_weight}</p>)}
-                </div>
-                <div>
-                    <label>Life span Min: </label>
-                    <input type="number" name='life_span_min' value={input.life_span_min} onChange={(e) => handleChange(e)} />
-                    {error.life_span_min && (<p className="error">{error.life_span_min}</p>)}
-                </div>
-                <div>
-                    <label>Life span Max: </label>
-                    <input type="number" name='life_span_max' value={input.life_span_max} onChange={(e) => handleChange(e)} />
-                    {error.life_span_max && (<p className="error">{error.life_span_max}</p>)}
-                </div>
-                <div>
-                    <label>Image URL: </label>
-                    <input type="text" name="image" value={input.image} onChange={(e) => handleChange(e)} />
-                    {error.image && (<p className="error">{error.image}</p>)}
-                </div>
-                <label>Temperaments: </label>
-                <select onChange={(e) => handleSelect(e)} name="temperaments" value={input.temperaments}>
-                    {allTemperaments.map(t => {
-                        return <option value={t.name}>{t.name}</option>
-                    })}
-                </select>
-                {error.temperaments && (<p className="error">{error.temperaments}</p>)}
-            </form>
-            <button type="submit" onClick={(e) => handleSubmit(e)}>Create</button>
-            {input.temperaments.map(t =>
-                <div className='temp'>
-                    <p>{t}</p>
-                    <button className="button" onClick={() => handleDelete(t)}>X</button>
-                </div>
-            )}
             <div className="backButton">
+                <Link to="/home">
+                    <button className="backo">
+                        <span class="text">Go Back</span>
+                    </button>
+                </Link>
+            </div>
+            <div className="Formyy">
+                <h1>Let's Create a Dog!!</h1>
+                <form onSubmit={(e) => handleSubmit(e)}>
+                    <div>
+                        <label>Breed Name: </label>
+                        <input type="text" name="name" value={input.name} onChange={(e) => handleChange(e)} />
+                        {error.name && (<p className="error">{error.name}</p>)}
+                    </div>
+                    <div>
+                        <label>Min Height: </label>
+                        <input type="number" name="min_height" value={input.min_height} onChange={(e) => handleChange(e)} />
+                        {error.min_height && (<p className="error">{error.min_height}</p>)}
+                    </div>
+                    <div>
+                        <label>Max Height: </label>
+                        <input type="number" name="max_height" value={input.max_height} onChange={(e) => handleChange(e)} />
+                        {error.max_height && (<p className="error">{error.max_height}</p>)}
+                    </div>
+                    <div>
+                        <label>Min Weight: </label>
+                        <input type="number" name="min_weight" value={input.min_weight} onChange={(e) => handleChange(e)} />
+                        {error.min_weight && (<p className="error">{error.min_weight}</p>)}
+                    </div>
+                    <div>
+                        <label>Max Weight: </label>
+                        <input type="number" name="max_weight" value={input.max_weight} onChange={(e) => handleChange(e)} />
+                        {error.max_weight && (<p className="error">{error.max_weight}</p>)}
+                    </div>
+                    <div>
+                        <label>Life span Min: </label>
+                        <input type="number" name='life_span_min' value={input.life_span_min} onChange={(e) => handleChange(e)} />
+                        {error.life_span_min && (<p className="error">{error.life_span_min}</p>)}
+                    </div>
+                    <div>
+                        <label>Life span Max: </label>
+                        <input type="number" name='life_span_max' value={input.life_span_max} onChange={(e) => handleChange(e)} />
+                        {error.life_span_max && (<p className="error">{error.life_span_max}</p>)}
+                    </div>
+                    <div>
+                        <label>Image URL: </label>
+                        <input type="text" name="image" value={input.image} onChange={(e) => handleChange(e)} />
+                        {error.image && (<p className="error">{error.image}</p>)}
+                    </div>
+                    <label>Temperaments: </label>
+                    <select onChange={(e) => handleSelect(e)} name="temperaments" value={input.temperaments}>
+                        {allTemperaments.map(t => {
+                            return <option value={t.name}>{t.name}</option>
+                        })}
+                    </select>
+                    {error.temperaments && (<p className="error">{error.temperaments}</p>)}
+                </form>
+                <button className="Cretop" type="submit" onClick={(e) => handleSubmit(e)}>Create</button>
+                <div className="tempy">
+                    {input.temperaments.map(t =>
+                        <div className='temp'>
+                            <p>{t}</p>
+                            <button className="bu" onClick={() => handleDelete(t)}>X</button>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     )

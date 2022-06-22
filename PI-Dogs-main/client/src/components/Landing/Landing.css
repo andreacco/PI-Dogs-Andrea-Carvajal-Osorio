@@ -26,7 +26,7 @@
     font-family: 'Nuosu SIL', serif;
     font-size: 60px;
 }
-.button {
+.bton {
     position: absolute;
     top: 15%;
     /* margin-top: -25px; */
@@ -36,7 +36,7 @@
     font-size: 30px;
 }
 /* From uiverse.io by @alexmaracinaru */
-.cta {
+.acta {
     position: relative;
     margin: auto;
     padding: 12px 18px;
@@ -45,7 +45,7 @@
     background: none;
    }
    
-   .cta:before {
+   .acta:before {
     content: "";
     position: absolute;
     top: 0;
@@ -58,7 +58,7 @@
     transition: all 0.3s ease;
    }
    
-   .cta span {
+   .acta span {
     position: relative;
     font-family: "Ubuntu", sans-serif;
     font-size: 18px;
@@ -67,7 +67,7 @@
     color: #234567;
    }
    
-   .cta svg {
+   .acta svg {
     position: relative;
     top: 0;
     margin-left: 10px;
@@ -80,15 +80,15 @@
     transition: all 0.3s ease;
    }
    
-   .cta:hover:before {
+   .acta:hover:before {
     width: 100%;
     background: #b1dae7;
    }
    
-   .cta:hover svg {
+   .acta:hover svg {
     transform: translateX(0);
    }
    
-   .cta:active {
+   .acta:active {
     transform: scale(0.95);
    }

@@ -1,11 +1,13 @@
 .Home {
     background-image: url(https://static.vecteezy.com/system/resources/previews/002/705/240/non_2x/background-of-dog-paw-prints-vector.jpg);
-    background-size: 40% cover;
+    /* background-size: 40% cover;
     background-position: center center;
     width: 100%;
-    height: 100vh;
-    /* background-position-y: bottom; */
-    background-repeat: no-repeat;
+    /* background-position-y: bottom;
+    background-repeat: no-repeat; */
+    /* height: 100vh; */
+    height: 1700px;
+    margin-right: 0;
 }
 
 .ContainerFunctions {
@@ -20,12 +22,39 @@
     display: flex;
     justify-items: center;
     /* justify-content: center; */
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-bottom: 0;
+    
   }
   .eachOne {
     padding: 10px;
-    margin: 10px;
+    margin: 0 150px 0 0;
     align-items: center;
-    /* background-color: yellow; */
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  .LineTwo {
+    display: flex;
+    justify-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+  .EachOneLineTwo {
+    padding: 10px;
+    margin: 0 30px 0 0;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  .pag {
+    margin-left: 150px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 350px);
+    gap: 50px;
+    justify-content: center;
   }
   /* ESTILOS PARA EL LOADING : https://uiverse.io/detail/Z-C-Code/grumpy-stingray-26
 /* ------------------------INIT BUTTON RELOAD ----------------------------- */
@@ -188,47 +217,101 @@
    /* ------------------------END BUTTON CREATE ----------------------------- */
    
    /* ------------------------INIT SEARCH BAR ----------------------------- */
-   /* ESTILOS DESDE: https://uiverse.io/detail/alexruix/slippery-frog-10
-   /* From uiverse.io by @alexruix */
-.group {
+   
+   .search {
     display: flex;
-    line-height: 28px;
     align-items: center;
-    position: relative;
-    max-width: 190px;
+    justify-content: space-between;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    
+}
+.search__input {
+    font-family: inherit;
+    font-size: inherit;
+    background-color: #f4f2f2;
+    border: nnoe;
+    color: #646464;
+    padding: 0.7rem 1rem;
+    border-radius: 30px;
+    width: 12em;
+    transition: all ease-in-out .5s;
+    margin-right: -2rem;
 }
 
-.input {
-    width: 100%;
-    height: 40px;
-    line-height: 28px;
-    padding: 0 1rem;
-    padding-left: 2.5rem;
-    border: 2px solid transparent;
-    border-radius: 8px;
-    outline: none;
-    background-color: #f3f3f4;
-    color: #0d0c22;
-    transition: .3s ease;
+.search__input:hover, .search__input:focus {
+  box-shadow: 0 0 1em #00000013;
 }
-   
-.input::placeholder {
-    color: #9e9ea7;
-   }
-   
-   .input:focus, input:hover {
-    outline: none;
-    border-color: rgba(234,76,137,0.4);
-    background-color: #fff;
-    box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
-   }
-   
-   .icon {
-    position: absolute;
-    left: 1rem;
-    fill: #9e9ea7;
-    width: 1rem;
-    height: 1rem;
-   }
+.search__input:focus {
+  outline: none;
+  background-color: #f0eeee;
+}
+.search__input::-webkit-input-placeholder {
+  font-weight: 100;
+  color: #ccc;
+}
+
+.search__input:focus {
+  background-color: #f0eeee;
+}
 /* ------------------------END SEARCH BAR----------------------------- */
+/* ------------------------INIT LOADER ------------------------------- */
+.loader {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 75%;
+    left: 60%;
+    margin: -200px 0 0 -200px;
+  }
+  
+  .loader-square {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    margin: 2px;
+    border-radius: 0px;
+    background: black;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    animation: square-animation 10s ease-in-out infinite both;
+   }
    
+   .loader-square:nth-of-type(0) {
+    animation-delay: 0s;
+   }
+   
+   .loader-square:nth-of-type(1) {
+    animation-delay: -1.4285714286s;
+   }
+   
+   .loader-square:nth-of-type(2) {
+    animation-delay: -2.8571428571s;
+   }
+   
+   .loader-square:nth-of-type(3) {
+    animation-delay: -4.2857142857s;
+   }
+   
+   .loader-square:nth-of-type(4) {
+    animation-delay: -5.7142857143s;
+   }
+   
+   .loader-square:nth-of-type(5) {
+    animation-delay: -7.1428571429s;
+   }
+   
+   .loader-square:nth-of-type(6) {
+    animation-delay: -8.5714285714s;
+   }
+   
+   .loader-square:nth-of-type(7) {
+    animation-delay: -10s;
+   }
+   /* ------------------------INIT LOADER ------------------------------- */
