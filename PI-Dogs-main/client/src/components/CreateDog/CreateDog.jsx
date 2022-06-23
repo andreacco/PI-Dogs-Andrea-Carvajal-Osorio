@@ -147,9 +147,6 @@ export default function CreateDog() {
         else if (Number(value.min_weight) > Number(value.max_weight)) {
             err.min_weight = 'The minimum weight of the dog cannot be greater than the maximum weight';
         }
-        if (!value.max_weight) {
-            err.max_weight = 'The maximum weight of the dog is required'
-        }
         else if (Number(value.max_weight) <= 1 || Number(value.max_weight) > 99) {
             err.max_weight = 'The maximum weight of the dog must contain a maximum of 2 digits';
         }
