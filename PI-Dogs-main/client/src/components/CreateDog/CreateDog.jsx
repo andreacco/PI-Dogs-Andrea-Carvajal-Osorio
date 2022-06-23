@@ -37,16 +37,17 @@ export default function CreateDog() {
     }
 
     function handleSelect(e) {
-        setInput({
-            ...input,
-            temperaments: [...input.temperaments, e.target.value]
-        })
+        if(!input.temperaments.includes(e.target.value)){
+            setInput({
+                ...input,
+                temperaments: [...input.temperaments, e.target.value]
+            }) 
+        }
         setErrors(validate({
             ...input,
             [e.target.name]: e.target.value
         }))
     }
-
     function handleSubmit(e) {
         e.preventDefault();
         if (!input.name || !input.min_height || !input.max_height || !input.min_weight || !input.max_weight || !input.temperaments.length) {

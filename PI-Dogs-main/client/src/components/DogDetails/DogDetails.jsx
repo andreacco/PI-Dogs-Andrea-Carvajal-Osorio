@@ -6,7 +6,7 @@ import "./DogDetails.css";
 
 export default function DogDetail(props) {
   const dispatch = useDispatch();
-  // console.log(props.match.params)
+  console.log(props)
   const index = props.match.params.dogId
 
   const dog = useSelector((state) => state.dogDetail);

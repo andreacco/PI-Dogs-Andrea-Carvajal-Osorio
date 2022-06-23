@@ -37,15 +37,16 @@ router.get('/', async (req, res, next) => {
 //   - Obtener el detalle de una raza de perro en particular
 //   - Debe traer solo los datos pedidos en la ruta de detalle de raza de perro
 //   - Incluir los temperamentos asociados
-router.get('/:id', async (req, res, next) => {
-    const { id } = req.params
-    // console.log(typeof(id));
-        try {
-            res.status(200).send(await dogDetail(id))
-        } catch (error) {
-            res.status(404).send(error.message)
-        }
-})
+// router.get('/:id', async (req, res, next) => {
+//     const { id } = req.params
+//     // console.log(typeof(id));
+//         try {
+//             res.status(200).send(await dogDetail(id))
+//         } catch (error) {
+//             res.status(404).send(error.message)
+//         }
+// })
+
 
 // - [ ] POST /dogs:
 //   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de raza de perro por body
@@ -60,6 +61,13 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-
+router.get('/:id', async (req, res, next) => {
+    const {id} = req.params
+    try {
+        res.status(200).send(await dogDetail(id))
+    } catch (error) {
+        next(error)
+    }
+})
 
 module.exports = router;
