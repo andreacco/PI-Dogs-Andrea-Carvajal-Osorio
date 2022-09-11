@@ -90,7 +90,7 @@ export const clearDogDetail = () => {
 }
 
 // export const filterDogsApi = () => async dispatch => {
-//     return await axios.get("http://localhost:3001/filterDogsApi")
+//     return await axios.get("https://pi-dogs-andreacco.herokuapp.com//filterDogsApi")
 //     .then(response => response.data)
 //     .then(apiDog => {
 //         return dispatch({ type: FILTER_BY_API_DOGS, payload: apiDog })
@@ -100,7 +100,7 @@ export const clearDogDetail = () => {
 
 
 // export const orderByWeightMin = () => async dispatch => {
-//     return await axios.get("http://localhost:3001/orderByWeightMin")
+//     return await axios.get("https://pi-dogs-andreacco.herokuapp.com//orderByWeightMin")
 //     .then(response => response.data)
 //     .then(weightMin => {
 //         return dispatch({ type: ORDER_BY_ASC_WEIGHT, payload: weightMin })
@@ -109,42 +109,42 @@ export const clearDogDetail = () => {
 
 // export const sort = (order, by) => async dispatch => {
 //     if (order === "nameAsc" && by === "all") {
-//         return await axios.get('http://localhost:3001/dogs')
+//         return await axios.get('https://pi-dogs-andreacco.herokuapp.com//dogs')
 //         .then(response => response.data)
 //         .then(nameAsc => {
 //             return dispatch({ type: ORDER_BY_ASC_NAME_ALL, payload: nameAsc, sort: order })
 //         })
 //     }
 //     if (order === "nameDesc" && by === "all") {
-//         return await axios.get("http://localhost:3001/filterByDescName")
+//         return await axios.get("https://pi-dogs-andreacco.herokuapp.com//filterByDescName")
 //         .then(response => response.data)
 //         .then(nameDesc => {
 //             return dispatch({ type: ORDER_BY_DESC_NAME_ALL, payload: nameDesc, sort: order })
 //         })
 //     }
 //     if (order === "weightAsc" && by === "all") {
-//         return await axios.get("http://localhost:3001/orderByWeightMin")
+//         return await axios.get("https://pi-dogs-andreacco.herokuapp.com//orderByWeightMin")
 //         .then(response => response.data)
 //         .then(weightMin => {
 //             return dispatch({ type: ORDER_BY_ASC_WEIGHT, payload: weightMin, sort: order })
 //         })
 //     }
 //     if (order === "weightDesc" && by === "all") {
-//         return await axios.get("http://localhost:3001/orderByWeightMax")
+//         return await axios.get("https://pi-dogs-andreacco.herokuapp.com//orderByWeightMax")
 //         .then(response => response.data)
 //         .then(weightMax => {
 //             return dispatch({ type: ORDER_BY_DESC_WEIGHT, payload: weightMax, sort: order })
 //         })
 //     }
 //     if (order === "nameAsc" && by === "API") {
-//         return await axios.get("http://localhost:3001/orderByNameAscApi")
+//         return await axios.get("https://pi-dogs-andreacco.herokuapp.com//orderByNameAscApi")
 //         .then(response => response.data)
 //         .then(nameAscApi => {
 //             return dispatch({ type: ORDER_BY_ASC_NAME_API, payload: nameAscApi })
 //         })
 //     }
 //     if (order === "nameDesc" && by === "API") {
-//         return await axios.get("http://localhost:3001/orderByNameDescApi")
+//         return await axios.get("https://pi-dogs-andreacco.herokuapp.com//orderByNameDescApi")
 //         .then(response => response.data)
 //         .then(nameDescApi => {
 //             return dispatch({ type: ORDER_BY_DESC_NAME_API, payload: nameDescApi })
@@ -157,14 +157,14 @@ export const clearDogDetail = () => {
 
 //     }
 //     if (order === "nameAsc" && by === "DB") {
-//         return await axios.get("http://localhost:3001/orderByNameAscDb")
+//         return await axios.get("https://pi-dogs-andreacco.herokuapp.com//orderByNameAscDb")
 //         .then(response => response.data)
 //         .then(nameAscDb => {
 //             return dispatch({ type: ORDER_BY_ASC_NAME_DB, payload: nameAscDb })
 //         })
 //     }
 //     if (order === "nameDesc" && by === "DB") {
-//         return await axios.get("http://localhost:3001/orderByNameDescDb")
+//         return await axios.get("https://pi-dogs-andreacco.herokuapp.com//orderByNameDescDb")
 //         .then(response => response.data)
 //         .then(nameDescBb => {
 //             return dispatch({ type: ORDER_BY_DESC_NAME_DB, payload: nameDescBb })
@@ -179,7 +179,7 @@ export const clearDogDetail = () => {
 // }
 
 // export const orderByWeightMax = () => async dispatch => {
-//     return await axios.get("http://localhost:3001/orderByWeightMax")
+//     return await axios.get("https://pi-dogs-andreacco.herokuapp.com//orderByWeightMax")
 //     .then(response => response.data)
 //     .then(weightMax => {
 //         return dispatch({ type: ORDER_BY_DESC_WEIGHT, payload: weightMax })
@@ -187,7 +187,7 @@ export const clearDogDetail = () => {
 // }
 
 // export const filterByAscName = () => async dispatch => {
-//     return await axios.get('http://localhost:3001/dogs')
+//     return await axios.get('https://pi-dogs-andreacco.herokuapp.com//dogs')
 //     .then(response => response.data)
 //     .then(nameAsc => {
 //         return dispatch({ type: ORDER_BY_ASC_NAME_ALL, payload: nameAsc})
@@ -195,7 +195,7 @@ export const clearDogDetail = () => {
 // }
 
 // export const filterByDescName = () => async dispatch => {
-//     return await axios.get("http://localhost:3001/filterByDescName")
+//     return await axios.get("https://pi-dogs-andreacco.herokuapp.com//filterByDescName")
 //     .then(response => response.data)
 //     .then(nameDesc => {
 //         return dispatch({ type: ORDER_BY_DESC_NAME_ALL, payload: nameDesc })
@@ -203,7 +203,7 @@ export const clearDogDetail = () => {
 // }
 
 // export const orderByNameAscApi = () => async dispatch => {
-//     return await axios.get("http://localhost:3001/orderByNameAscApi")
+//     return await axios.get("https://pi-dogs-andreacco.herokuapp.com//orderByNameAscApi")
 //     .then(response => response.data)
 //     .then(nameAscApi => {
 //         return dispatch({ type: ORDER_BY_ASC_NAME_API, payload: nameAscApi })
@@ -211,7 +211,7 @@ export const clearDogDetail = () => {
 // }
 
 // export const orderByNameDescApi = () => async dispatch => {
-    // return await axios.get("http://localhost:3001/orderByNameDescApi")
+    // return await axios.get("https://pi-dogs-andreacco.herokuapp.com//orderByNameDescApi")
     // .then(response => response.data)
     // .then(nameDescApi => {
     //     return dispatch({ type: ORDER_BY_DESC_NAME_API, payload: nameDescApi })
@@ -219,7 +219,7 @@ export const clearDogDetail = () => {
 // }
 
 // export const orderByNameAscDb = () => async dispatch => {
-    // return await axios.get("http://localhost:3001/orderByNameAscDb")
+    // return await axios.get("https://pi-dogs-andreacco.herokuapp.com//orderByNameAscDb")
     // .then(response => response.data)
     // .then(nameAscDb => {
     //     return dispatch({ type: ORDER_BY_ASC_NAME_DB, payload: nameAscDb })
@@ -227,7 +227,7 @@ export const clearDogDetail = () => {
 // }
 
 // export const orderByNameDescDb = () => async dispatch => {
-    // return await axios.get("http://localhost:3001/orderByNameDescDb")
+    // return await axios.get("https://pi-dogs-andreacco.herokuapp.com//orderByNameDescDb")
     // .then(response => response.data)
     // .then(nameDescBb => {
     //     return dispatch({ type: ORDER_BY_DESC_NAME_DB, payload: nameDescBb })
