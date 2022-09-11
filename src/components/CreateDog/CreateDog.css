@@ -200,5 +200,45 @@
  }
  
  .error {
-  color: red
- }
+  color: red;
+}
+
+  p {
+    display: inline;
+    margin-right: 80px;
+    margin-left: 80px;
+}
+  .error--p {
+    color: red;
+    display: block;
+  }
+
+ .input-group {
+  position: relative;
+  margin-bottom: 19px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+ .input-group-2 {
+  position: relative;
+  margin-bottom: 19px;
+  border-bottom: 1px solid #e5e5e5;
+  display: inline;
+}
+
+.input--style-2 {
+  padding: 2px 0;
+  color: #666;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.input--style-2-2 {
+  padding: 2px 0;
+  color: #666;
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 50px;
+  margin-left: 50px;
+}
+

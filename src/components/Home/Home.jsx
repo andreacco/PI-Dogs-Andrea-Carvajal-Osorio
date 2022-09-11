@@ -96,7 +96,7 @@ export default function Home() {
             <div className="ContainerFunctions">
                 <div className="LineOne">
                     <div className="eachOne">
-                        <h1>Wikidogs</h1>
+                        <a href="/" className="wikidogs-title">Wikidogs</a>
                     </div>
                     <div className="eachOne">
                         <button onClick={e => handleClick(e)} className="buttonReload">

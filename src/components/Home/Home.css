@@ -34,6 +34,16 @@
     justify-content: space-between;
     flex-direction: row;
   }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .wikidogs-title {
+    font-size: 30px;
+    font-weight: 900px;
+  }
   .LineTwo {
     display: flex;
     justify-items: center;

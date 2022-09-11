@@ -218,63 +218,65 @@ export default function CreateDog() {
             <div className="Formyy">
                 <h1>Let's Create a Dog!!</h1>
                 <form onSubmit={(e) => handleSubmit(e)}>
-                    <div>
-                        <label>Breed Name: </label>
-                        <input type="text" name="name" value={input.name} onChange={(e) => handleChange(e)} />
-                        {error.name && (<p className="error">{error.name}</p>)}
+                    <div className="input-group">
+                        <input className="input--style-2" placeholder="Breed Name:" type="text" name="name" value={input.name} onChange={(e) => handleChange(e)} />
+                        {error.name && (<p className="error--p">{error.name}</p>)}
                     </div>
-                    <div>
-                        <label>Min Height: </label>
-                        <input type="number" name="min_height" value={input.min_height} onChange={(e) => handleChange(e)} />
-                        {error.min_height && (<p className="error">{error.min_height}</p>)}
+                    <div className="input-group">
+                        <input className="input--style-2-2" placeholder="Min Height:" type="number" name="min_height" value={input.min_height} onChange={(e) => handleChange(e)} />
+                    {/* </div>
+                    <div className="input-group"> */}
+                        <input className="input--style-2-2" placeholder="Max Height:" type="number" name="max_height" value={input.max_height} onChange={(e) => handleChange(e)} />
+                        <div className="error">
+                            {error.min_height && (<p>{error.min_height}</p>)}
+                            {error.max_height && (<p>{error.max_height}</p>)}
+                        </div>
                     </div>
-                    <div>
-                        <label>Max Height: </label>
-                        <input type="number" name="max_height" value={input.max_height} onChange={(e) => handleChange(e)} />
-                        {error.max_height && (<p className="error">{error.max_height}</p>)}
+                    <div className="input-group">
+                        <input className="input--style-2-2" placeholder="Min Weight:" type="number" name="min_weight" value={input.min_weight} onChange={(e) => handleChange(e)} />
+                    {/* </div>
+                    <div className="input-group"> */}
+                        <input className="input--style-2-2" placeholder="Max Weight:" type="number" name="max_weight" value={input.max_weight} onChange={(e) => handleChange(e)} />
+                        <div className="error">
+                        {error.min_weight && (<p>{error.min_weight}</p>)}
+                        {error.max_weight && (<p>{error.max_weight}</p>)}
+                        </div>
                     </div>
-                    <div>
-                        <label>Min Weight: </label>
-                        <input type="number" name="min_weight" value={input.min_weight} onChange={(e) => handleChange(e)} />
-                        {error.min_weight && (<p className="error">{error.min_weight}</p>)}
+                    <div className="input-group">
+                        <input className="input--style-2-2" placeholder="Life span Min:" type="number" name='life_span_min' value={input.life_span_min} onChange={(e) => handleChange(e)} />
+                    {/* </div>
+                    <div className="input-group"> */}
+                        <input className="input--style-2-2" placeholder="Life span Max:" type="number" name='life_span_max' value={input.life_span_max} onChange={(e) => handleChange(e)} />
+                        <div className="error">
+                        {error.life_span_min && (<p>{error.life_span_min}</p>)}
+                        {error.life_span_max && (<p>{error.life_span_max}</p>)}
+                        </div>
                     </div>
-                    <div>
-                        <label>Max Weight: </label>
-                        <input type="number" name="max_weight" value={input.max_weight} onChange={(e) => handleChange(e)} />
-                        {error.max_weight && (<p className="error">{error.max_weight}</p>)}
+                    <div className="input-group">
+                        <input className="input--style-2" placeholder="Image URL:" type="text" name="image" value={input.image} onChange={(e) => handleChange(e)} />
+                        {error.image && (<p className="error--p">{error.image}</p>)}
                     </div>
-                    <div>
-                        <label>Life span Min: </label>
-                        <input type="number" name='life_span_min' value={input.life_span_min} onChange={(e) => handleChange(e)} />
-                        {error.life_span_min && (<p className="error">{error.life_span_min}</p>)}
+                    <div className="input-group">
+                        <div className="rs-select2 js-select-simple select--no-search">
+                            <select onChange={(e) => handleSelect(e)} name="temperaments" value={input.temperaments}>
+                                <option>Temperaments</option>
+                                {allTemperaments.map(t => {
+                                    return <option value={t.name}>{t.name}</option>
+                                })}
+                            </select>
+                            {error.temperaments && (<p>{error.temperaments}</p>)}
+                        </div>
                     </div>
-                    <div>
-                        <label>Life span Max: </label>
-                        <input type="number" name='life_span_max' value={input.life_span_max} onChange={(e) => handleChange(e)} />
-                        {error.life_span_max && (<p className="error">{error.life_span_max}</p>)}
-                    </div>
-                    <div>
-                        <label>Image URL: </label>
-                        <input type="text" name="image" value={input.image} onChange={(e) => handleChange(e)} />
-                        {error.image && (<p className="error">{error.image}</p>)}
-                    </div>
-                    <label>Temperaments: </label>
-                    <select onChange={(e) => handleSelect(e)} name="temperaments" value={input.temperaments}>
-                        {allTemperaments.map(t => {
-                            return <option value={t.name}>{t.name}</option>
-                        })}
-                    </select>
-                    {error.temperaments && (<p className="error">{error.temperaments}</p>)}
                 </form>
-                <button className="Cretop" type="submit" onClick={(e) => handleSubmit(e)}>Create</button>
                 <div className="tempy">
                     {input.temperaments.map(t =>
                         <div className='temp'>
-                            <p>{t}</p>
+                            <h5>{t}</h5>
                             <button className="bu" onClick={() => handleDelete(t)}>X</button>
                         </div>
                     )}
                 </div>
+                <button className="Cretop" type="submit" onClick={(e) => handleSubmit(e)}>Create</button>
             </div>
         </div>
     )
