@@ -11,7 +11,7 @@ export const SORT_BY = 'SORT_BY'
 
 export const getAllDogs = () => async dispatch => {
     try {
-        await axios.get('http://localhost:3001/dogs')
+        await axios.get('https://pi-dogs-andreacco.herokuapp.com/dogs')
         .then(response => response.data)
         .then(Alldogs => {
             return dispatch({ type: GET_ALL_DOGS, payload: Alldogs })
@@ -24,7 +24,7 @@ export const getAllDogs = () => async dispatch => {
 export function createDog(newDog){
     return async function (dispatch){
         try {
-            let res = await axios.post('http://localhost:3001/dogs', newDog)
+            let res = await axios.post('https://pi-dogs-andreacco.herokuapp.com/dogs', newDog)
             return dispatch({type: CREATE_DOG, payload: res.data})
         } catch (error) {
             console.log(error);
@@ -35,7 +35,7 @@ export function createDog(newDog){
 export function getDogDetail(id){
     return async function (dispatch){
         try {
-            let res = await axios.get(`http://localhost:3001/dogs/${id}`)
+            let res = await axios.get(`https://pi-dogs-andreacco.herokuapp.com/dogs/${id}`)
             return dispatch({type: GET_DOG_DETAIL, payload: res.data})
         } catch (error) {
             console.log(error);
@@ -46,7 +46,7 @@ export function getDogDetail(id){
 export function searchDog(name){
     return async function (dispatch){
         try {
-            let dog = await axios.get(`http://localhost:3001/dogs?name=${name}`)
+            let dog = await axios.get(`https://pi-dogs-andreacco.herokuapp.com/dogs?name=${name}`)
             return dispatch({type: SEARCH_DOG, payload: dog.data})
         } catch (error) {
             alert("There's no result for your search");
@@ -55,7 +55,7 @@ export function searchDog(name){
 }
 
 export const getTemperaments = () => async dispatch => {
-    return await axios.get("http://localhost:3001/temperaments")
+    return await axios.get("https://pi-dogs-andreacco.herokuapp.com/temperaments")
     .then(response => response.data)
     .then(temps => {
         return dispatch({ type: GET_TEMPERAMENTS, payload: temps })
