@@ -34,11 +34,12 @@
 
 .description {
     font-size: 30px;
+    margin-top: 60px;
 }
 /* From uiverse.io by @alexmaracinaru */
 .acta {
     position: relative;
-    margin: auto;
+    margin-top: 60px;
     padding: 12px 18px;
     transition: all 0.2s ease;
     border: none;
@@ -52,7 +53,7 @@
     left: 0;
     display: block;
     border-radius: 50px;
-    background: #b1dae7;
+    background: #daa467;
     width: 45px;
     height: 45px;
     transition: all 0.3s ease;
@@ -64,7 +65,7 @@
     font-size: 18px;
     font-weight: 700;
     letter-spacing: 0.05em;
-    color: #234567;
+    color: #000000;
    }
    
    .acta svg {
@@ -74,7 +75,7 @@
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke: #234567;
+    stroke: #000000;
     stroke-width: 2;
     transform: translateX(-5px);
     transition: all 0.3s ease;
@@ -82,7 +83,7 @@
    
    .acta:hover:before {
     width: 100%;
-    background: #b1dae7;
+    background: #daa467;
    }
    
    .acta:hover svg {
