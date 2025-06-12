@@ -9,39 +9,122 @@ require('dotenv').config();
 //   - Obtener un listado de las razas de perro
 //   - Debe devolver solo los datos necesarios para la ruta principal
     const listDogsApi = async () => {
-        // Va a solicitar a la Api la información de los perros y al obtenerla, solo va a devolver los datos necesarios para el home.
-        // Este es el objeto que me llega (hay más datos, pero este está solo con los datos que necesito):
-        //     "weight": {
-        //     "metric": "3 - 6"
-        //     },
-        //     "height": {
-        //     "metric": "23 - 29"
-        //     },
-        //     "id": 1,
-        //     "name": "Affenpinscher",
-        //     "life_span": "10 - 12 years",
-        //                   10 years
-        //     "temperament": "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
-        //     "image": {
-        //     "url": "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg"
-        //     }
-        let regex = /(\d+)/g
-        const link = await axios.get(`https://api.thedogapi.com/v1/breeds?API_KEY=${API_KEY}`)
-        const dog = await link.data.map(d => {
+        console.log('Iniciando la obtención de datos de perros desde la API externa.');
+
+    try {
+        // Paso 1: Obtener la lista de razas de perro desde la API principal
+        const breedsResponse = await axios.get('https://api.thedogapi.com/v1/breeds', {
+            headers: {
+                'x-api-key': API_KEY // Asegúrate de que tu API_KEY esté configurada en .env
+            }
+        });
+
+        const breeds = breedsResponse.data;        
+
+        // Paso 2: Crear promesas para buscar las imágenes de cada perro en paralelo
+        const imagePromises = breeds.map(async (d) => {
+            // La API principal devuelve el ID de la imagen en 'd.image' (si es un string).
+            // Si ya tiene una URL en 'd.image.url', la usamos directamente.
+            // Si no, intentamos obtenerla con el ID.
+            const httpsRegex = "^https://[\w.-]+(\.[\w.-]+)+[\w\-\.\?\/=&\#\+\%\~]*/?"
+            if (d.reference_image_id && typeof d.reference_image_id === 'string') { // Si d.image es el ID de la imagen
+                try {
+                    const imageResponse = await axios.get(`https://api.thedogapi.com/v1/images/${d.reference_image_id}`, {
+                        headers: {
+                            'x-api-key': API_KEY
+                        }
+                    });
+                    return imageResponse.data.url; // Retorna la URL de la imagen
+                } catch (imgError) {
+                    // Si falla la obtención de una imagen, se registra el error y se retorna una imagen de fallback.
+                    console.warn(`No se pudo obtener la imagen para el ID ${d.reference_image_id}: ${imgError.message}`);
+                    return 'https://i.pinimg.com/474x/d8/c0/52/d8c0529ad3f1baf0cb17a9534172b948--smiling-animals-smiling-dogs.jpg'; // URL de imagen de fallback
+                }
+            } else if (d.reference_image_id && d.reference_image_id.match(httpsRegex)) { // Si d.image ya es un objeto con la URL
+                return d.reference_image_id;
+            }
+            // Retorna una imagen de fallback si no hay ID de imagen o URL
+            return 'https://i.pinimg.com/474x/d8/c0/52/d8c0529ad3f1baf0cb17a9534172b948--smiling-animals-smiling-dogs.jpg';
+        });
+
+        // Paso 3: Esperar a que todas las promesas de imágenes se resuelvan
+        const imageUrls = await Promise.all(imagePromises);
+
+        // Paso 4: Mapear los datos originales de los perros, añadiendo la URL de la imagen obtenida
+        const dogs = breeds.map((d, index) => {
+            const imageUrl = imageUrls[index]; // Asigna la URL de imagen correspondiente
+
+            // Expresión regular para extraer números de cadenas como "10 - 12 years"
+            const regex = /(\d+)/g;
+
+            // Parseo robusto de altura (min_height, max_height)
+            const [min_height_str, max_height_str] = d.height?.metric?.split(' - ') || [null, null];
+            const min_height_val = min_height_str ? Number(min_height_str) : null;
+            const max_height_val = max_height_str ? Number(max_height_str) : null;
+
+            // Parseo robusto de peso (min_weight, max_weight)
+            const [min_weight_str, max_weight_str] = d.weight?.metric?.split(' - ') || [null, null];
+            const min_weight_val = min_weight_str ? Number(min_weight_str) : null;
+            const max_weight_val = max_weight_str ? Number(max_weight_str) : null;
+
+            // Parseo robusto de esperanza de vida (life_span_min, life_span_max)
+            const lifeSpanNumbers = d.life_span?.match(regex)?.map(Number);
+            const life_span_min_val = lifeSpanNumbers && lifeSpanNumbers.length > 0 ? Math.min(...lifeSpanNumbers) : null;
+            const life_span_max_val = lifeSpanNumbers && lifeSpanNumbers.length > 0 ? Math.max(...lifeSpanNumbers) : null;
+
             return {
                 id: d.id,
                 name: d.name,
-                min_height: Number(d.height.metric.slice(0, 2)), // que extraiga empezando en 0 y terminando en 2, res--> 23
-                max_height: Number(d.height.metric.slice(4)), // que extraiga desde 4 y terminando en arr.lenght, res --> 29
-                min_weight: Number(d.weight.metric.slice(0, 2)),
-                max_weight: Number(d.weight.metric.slice(4)),
-                life_span_min: Math.min(...d.life_span.match(regex)), // le digo con elregex que busque solo los numeros que matcheen con el string que me trae la api, luego busco el menor y es lo que guarda life_span_min
-                life_span_max: Math.max(...d.life_span.match(regex)), // le digo con el regex que busque solo los numeros que matcheen con el string que me trae la api, luego busco el mayor y es lo que guarda life_span_max
-                temperaments: d.temperament,
-                image: d.image.url
-            }
+                min_height: min_height_val,
+                max_height: max_height_val,
+                min_weight: min_weight_val,
+                max_weight: max_weight_val,
+                life_span_min: life_span_min_val,
+                life_span_max: life_span_max_val,
+                temperaments: d.temperament, // Esto puede ser un string separado por comas
+                image: imageUrl // Aquí se usa la URL real de la imagen
+            };
         });
-        return dog;
+        return dogs;
+
+    } catch (error) {
+        console.error("Error al obtener datos de la API de perros (listDogsApi):", error.message);
+        // Relanza el error para que sea capturado por el manejador de errores de la ruta
+        throw new Error("No se pudieron cargar los datos de perros de la API externa.");
+    }
+        // // // Va a solicitar a la Api la información de los perros y al obtenerla, solo va a devolver los datos necesarios para el home.
+        // // // Este es el objeto que me llega (hay más datos, pero este está solo con los datos que necesito):
+        // // //     "weight": {
+        // // //     "metric": "3 - 6"
+        // // //     },
+        // // //     "height": {
+        // // //     "metric": "23 - 29"
+        // // //     },
+        // // //     "id": 1,
+        // // //     "name": "Affenpinscher",
+        // // //     "life_span": "10 - 12 years",
+        // // //                   10 years
+        // // //     "temperament": "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
+        // // //     "image": {
+        // // //     "url": "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg"
+        // // //     }
+        // // let regex = /(\d+)/g
+        // // const link = await axios.get(`https://api.thedogapi.com/v1/breeds?API_KEY=${API_KEY}`)
+        // // const dog = await link.data.map(d => {
+        // //     return {
+        // //         id: d.id,
+        // //         name: d.name,
+        // //         min_height: Number(d.height.metric.slice(0, 2)), // que extraiga empezando en 0 y terminando en 2, res--> 23
+        // //         max_height: Number(d.height.metric.slice(4)), // que extraiga desde 4 y terminando en arr.lenght, res --> 29
+        // //         min_weight: Number(d.weight.metric.slice(0, 2)),
+        // //         max_weight: Number(d.weight.metric.slice(4)),
+        // //         life_span_min: Math.min(...d.life_span.match(regex)), // le digo con elregex que busque solo los numeros que matcheen con el string que me trae la api, luego busco el menor y es lo que guarda life_span_min
+        // //         life_span_max: Math.max(...d.life_span.match(regex)), // le digo con el regex que busque solo los numeros que matcheen con el string que me trae la api, luego busco el mayor y es lo que guarda life_span_max
+        // //         temperaments: d.temperament,
+        // //         image: d.image.url
+        // //     }
+        // // });
+        // // return dog;
     };
     
     const listDogsBd = async () => {

@@ -56,6 +56,7 @@ export default function CreateDog() {
         else if (error.name || error.min_height || error.max_height || error.min_weight || error.max_weight || error.temperaments) {
             alert("Incorrect Data")
         }
+        // eslint-disable-next-line
         else if (allDogs.find((d) => d.name.toLowerCase() == input.name.toLowerCase())) {
             alert("There's already a dog with that name!");
         }
@@ -91,6 +92,7 @@ export default function CreateDog() {
 
     function validate(value) {
         let err = {}
+        // eslint-disable-next-line
         let regex = new RegExp("^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$")
         //--------------------INIT NAME------------------------//
 
@@ -101,6 +103,7 @@ export default function CreateDog() {
             err.name = "The name must have a length between 3 and 20 characters";
         } else if (/[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>\d/?~]/.test(value.name)) {
             err.name = "Only capital and lower case letters";
+            // eslint-disable-next-line
         } else if (value.name.includes("-") || value.name.charAt(value.name.length - 1) == " " || value.name.charAt(0) == " ") {
             err.name = "Enter a valid name, mix of capital and lower case!";
         }

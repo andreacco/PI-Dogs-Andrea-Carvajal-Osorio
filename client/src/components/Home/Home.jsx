@@ -195,9 +195,9 @@ export default function Home() {
 }
 
 
-{/* <select onChange={(e) => handleChangeTemperament(e)} name='filterByTemp' defaultValue={"all"}>
+/* <select onChange={(e) => handleChangeTemperament(e)} name='filterByTemp' defaultValue={"all"}>
                         <option value="all">Temperaments</option>
                         {temperaments.map(t => (
                         <option value={t.name}>{t.name}</option>
                         ))}
-                    </select> */}
+                    </select> */

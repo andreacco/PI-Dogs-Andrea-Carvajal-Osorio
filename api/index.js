@@ -17,12 +17,33 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// // const server = require('./src/app.js');
+// // const { conn } = require('./src/db.js');
+
+// // // Syncing all the models at once.
+// // conn.sync({ force: true }).then(() => {
+// //   server.listen(3001, () => {
+// //     console.log('%s listening at 3001'); // eslint-disable-line no-console
+// //   });
+// // });
+
+
+// Carga las variables de entorno desde el archivo .env
+require('dotenv').config(); 
+
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 
-// Syncing all the models at once.
+// Sincronizando todos los modelos a la vez.
 conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log('%s listening at 3001'); 
   });
 });
+
+/* const PORT = 3001
+
+server.listen(PORT, () => {
+  console.log("success")
+}) */
