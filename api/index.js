@@ -29,21 +29,27 @@
 
 
 // Carga las variables de entorno desde el archivo .env
+// require('dotenv').config(); 
+
+// const server = require('./src/app.js');
+// const { conn } = require('./src/db.js');
+
+// // Sincronizando todos los modelos a la vez.
+// conn.sync({ force: true }).then(() => {
+//   server.listen(3001, () => {
+//     // eslint-disable-next-line no-console
+//     console.log('%s listening at 3001'); 
+//   });
+// });
 require('dotenv').config(); 
 
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
+const syncOptions = { force: process.env.NODE_ENV !== 'production' }; // Solo force: true en desarrollo
 
-// Sincronizando todos los modelos a la vez.
-conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
+conn.sync(syncOptions).then(() => {
+  server.listen(process.env.PORT || 3001, () => {
     // eslint-disable-next-line no-console
-    console.log('%s listening at 3001'); 
+    console.log(`%s listening at ${process.env.PORT || 3001}`); 
   });
 });
-
-/* const PORT = 3001
-
-server.listen(PORT, () => {
-  console.log("success")
-}) */
